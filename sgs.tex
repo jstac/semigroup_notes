@@ -1,0 +1,411 @@
+\documentclass[12pt, reqno]{amsart}
+
+
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+
+% avoid `Too many math alphabets used in version normal` error
+\newcommand\hmmax{0}
+\newcommand\bmmax{0}
+
+\usepackage[mathscr]{euscript} 
+\usepackage{stmaryrd} % St Mary's Road symbols font --- some extra symbols
+
+%\usepackage{fontspec} 
+\usepackage[xcharter]{newtxmath}
+%\setmainfont{XCharter}
+
+\usepackage{graphics, stackrel}
+\usepackage{graphicx}
+
+\usepackage{verbatim}
+\usepackage{natbib}
+\usepackage{enumitem}
+
+%font
+%\usepackage{lmodern}
+%\usepackage[T1]{fontenc}
+%\usepackage{fontspec} 
+%\usepackage[xcharter]{newtxmath}
+%\setmainfont{XCharter}
+%\usepackage{mathpazo}
+%\usepackage{tgpagella}
+
+%subfloats / figures
+\usepackage{caption}
+\usepackage{subcaption}
+
+% For pandas latex tables
+\usepackage{booktabs}
+
+
+\usepackage{fancyvrb}
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\usepackage{mdwlist}
+
+\usepackage[breaklinks=true, citecolor=Brown, colorlinks=true, linkcolor=blue]{hyperref}
+
+% lists
+\usepackage{enumitem}
+\setlist[enumerate]{itemsep=2pt,topsep=3pt}
+\setlist[itemize]{itemsep=2pt,topsep=3pt}
+\setlist[enumerate,1]{label=(\roman*)}
+
+\usepackage{mathrsfs}  % caligraphic
+%\usepackage{stix} 
+\usepackage{bbm}
+\usepackage{bm}        % bold symbols
+
+
+%% page layout
+\usepackage[left=1.25in, right=1.25in, top=1.0in, bottom=1.15in, includehead, includefoot]{geometry}
+
+% nice inequalities
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
+% inner product
+\providecommand{\inner}[1]{\left\langle{#1}\right\rangle}
+\providecommand{\innerp}[1]{\left\langle{#1}\right\rangle_\pi}
+
+% lists
+\usepackage{enumitem}
+\setlist[enumerate]{itemsep=2pt,topsep=3pt}
+\setlist[itemize]{itemsep=2pt,topsep=3pt}
+\setlist[enumerate,1]{label={\upshape (\roman*)}}
+
+
+\usepackage[ruled, linesnumbered]{algorithm2e}
+
+%extra spacing
+\renewcommand{\baselinestretch}{1.25}
+
+%horizonal line
+\newcommand{\HRule}{\rule{\linewidth}{0.3mm}}
+
+% skip a line between paragraphs, no indentation
+%\setlength{\parskip}{1.5ex plus0.5ex minus0.5ex}
+%\setlength{\parindent}{0pt}
+
+% footnote without a maker (blfootnote)
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+\DeclareMathOperator{\fix}{fix}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\DeclareMathOperator{\cl}{cl}
+\DeclareMathOperator{\Int}{int}
+%\DeclareMathOperator{\overset{\circ}}{int}
+\DeclareMathOperator{\Prob}{Prob}
+\DeclareMathOperator{\determinant}{det}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\graph}{graph}
+
+% mics short cuts and symbols
+\newcommand{\st}{\ensuremath{\ \mathrm{s.t.}\ }}
+\newcommand{\setntn}[2]{ \{ #1 : #2 \} }
+\newcommand{\fore}{\therefore \quad}
+\newcommand{\preqsd}{\preceq_{sd} }
+\newcommand{\toas}{\stackrel {\textrm{ \scriptsize{a.s.} }} {\to} }
+\newcommand{\tod}{\stackrel { d } {\to} }
+\newcommand{\too}{\stackrel { o } {\to} }
+\newcommand{\toweak}{\stackrel { w } {\to} }
+\newcommand{\topr}{\stackrel { p } {\to} }
+\newcommand{\disteq}{\stackrel { \mathscr D } {=} }
+\newcommand{\eqdist}{\stackrel {\textrm{ \scriptsize{d} }} {=} }
+\newcommand{\iidsim}{\stackrel {\textrm{ {\sc iid }}} {\sim} }
+\newcommand{\1}{\mathbbm 1}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\dee}{\,{\rm d}}
+\newcommand{\og}{{\mathbbm G}}
+\newcommand{\ctimes}{\! \times \!}
+\newcommand{\sint}{{\textstyle\int}}
+
+\newcommand{\given}{\, | \,}
+\newcommand{\A}{\forall}
+
+% d for integrals
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\e{\mathrm{e}}
+
+% nice emptyset
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+
+%\renewcommand{\times}{\! \times \!}
+
+\newcommand{\aA}{\mathcal A}
+\newcommand{\cC}{\mathscr C}
+\newcommand{\sS}{\mathcal S}
+\newcommand{\bB}{\mathcal B}
+\newcommand{\oO}{\mathcal O}
+\newcommand{\gG}{\mathcal G}
+\newcommand{\hH}{\mathcal H}
+\newcommand{\kK}{\mathcal K}
+\newcommand{\iI}{\mathcal I}
+\newcommand{\eE}{\mathcal E}
+\newcommand{\fF}{\mathscr F}
+\newcommand{\qQ}{\mathcal Q}
+\newcommand{\tT}{\mathcal T}
+\newcommand{\xX}{\mathcal X}
+\newcommand{\yY}{\mathcal Y}
+\newcommand{\rR}{\mathcal R}
+\newcommand{\zZ}{\mathcal Z}
+\newcommand{\wW}{\mathcal W}
+\newcommand{\uU}{\mathcal U}
+\newcommand{\lL}{\mathcal L}
+\newcommand{\mM}{\mathcal M}
+\newcommand{\dD}{\mathcal D}
+\newcommand{\pP}{\mathcal P}
+\newcommand{\vV}{\mathcal V}
+
+\newcommand{\Bsf}{\mathsf B}
+\newcommand{\Hsf}{\mathsf H}
+\newcommand{\Vsf}{\mathsf V}
+
+\newcommand{\BB}{\mathbbm B}
+\newcommand{\DD}{\mathbbm D}
+\newcommand{\RR}{\mathbbm R}
+\newcommand{\CC}{\mathbbm C}
+\newcommand{\QQ}{\mathbbm Q}
+\newcommand{\NN}{\mathbbm N}
+\newcommand{\GG}{\mathbbm G}
+\newcommand{\UU}{\mathbbm U}
+\newcommand{\TT}{\mathbbm T}
+\newcommand{\YY}{\mathbbm Y}
+\newcommand{\ZZ}{\mathbbm Z}
+\newcommand{\HH}{\mathbbm H}
+\newcommand{\MM}{\mathbbm M}
+\newcommand{\PP}{\mathbbm P}
+\newcommand{\VV}{\mathbbm V}
+\newcommand{\EE}{\mathbbm E}
+
+
+\newcommand{\bH}{\mathbf H}
+\newcommand{\bT}{\mathbf T}
+
+\newcommand{\var}{\mathbbm V}
+
+\newcommand{\Xsf}{\mathsf X}
+\newcommand{\Msf}{\mathsf M}
+\newcommand{\Asf}{\mathsf A}
+\newcommand{\Gsf}{\mathsf G}
+\newcommand{\II}{\mathsf I}
+\newcommand{\WW}{\mathsf W}
+
+\renewcommand{\phi}{\varphi}
+\renewcommand{\epsilon}{\varepsilon}
+
+\newcommand{\bP}{\mathbf P}
+\newcommand{\bQ}{\mathbf Q}
+\newcommand{\bE}{\mathbf E}
+\newcommand{\bM}{\mathbf M}
+\newcommand{\bX}{\mathbf X}
+\newcommand{\bY}{\mathbf Y}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{notation}{Notation}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{condition}{Condition}[section]
+
+
+%\DeclareTextFontCommand{\emph}{\bfseries}
+
+%%%%%%%%%%%%%%%%%% end my preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\navy}[1]{\textcolor{blue}{#1}}
+
+
+
+
+\begin{document}
+
+
+\title{Semigroup Notes}
+
+\author{JS and JY}
+
+\date{\today}
+
+\maketitle
+
+\section{Definitions}
+
+Let $E$ be any set and let $\TT \coloneq (T_t)_{t \geq 0}$ be a family of
+self-maps on $E$. The pair $(E, \TT)$ is called a \navy{semidynamical system} if 
+$T_0$ is the idendity and $\TT$ has the semigroup property
+%
+\begin{equation*}
+    T_{s + t} = T_t \circ T_s
+    \quad \text{for all } s, t \in \RR_+.
+\end{equation*}
+%
+If $E$ is a vector space and each $T_t \in \TT$ is linear, then $(E, \TT)$ is
+called an \navy{algebraic operator (AO) semigroup}.  If, in addition, $E$ is an
+Banach space and $t \mapsto T_t u$ is continuous for all $u \in E$, then $(E, \TT)$
+is called a \navy{$C_0$-semigroup}.  When $E$ is understood, we say that $\TT$
+is a $C_0$-semigroup.
+
+
+
+\section{Continuity results}
+
+In what follows, $E$ is a Banach space and $\lL(E)$ is the set of bounded linear
+operators from $E$ to itself.  The symbol $\| \cdot \|$ denotes either the norm
+on $E$ or the operator norm on $\lL(E)$, depending on context.
+
+Let $K$ be a compact subset of $\RR$ and let $\{T_t\}_{t \in K}$ be a subset of
+$\lL(E)$.  The following result is from \cite{engel2006short}.
+
+\begin{lemma}\label{l:contin}
+    The following statements are equivalent:
+    %
+    \begin{enumerate}
+        \item The map $t \mapsto T_t u$ is continuous on $K$ for all $u \in E$.
+        \item $\|T_t\|$ is bounded over $t \in K$ and there exists a dense subset
+            $D$ of $E$ such that $t \mapsto T_t u$ is continuous on $K$ for all $u \in D$.
+        \item For any compact $C \subset E$, the map $(t, u) \mapsto T_t u$ is
+            uniformly continuous on $K \times C$.
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    ((i) $\implies$ (ii)) By (i), for any $u \in E$, the map $t \mapsto T_t u$ is
+    continuous on a compact set and, therefore, its image is bounded in $E$.  
+    Hence, by the uniform boundedness principle, $\|T_t\|$ is bounded over $t
+    \in K$.  The statement in (ii) regarding continuity is obvious.
+
+    ((ii) $\implies$ (iii)).  Fix compact $C \subset E$ and $\epsilon > 0$.
+    We metrize $K \times C$ by setting $d((s, u), (t, v)) = \| u - v\| \vee |s-t|$.
+    Choose $M$ such that $\|T_t\| \leq M$ for all $t \in K$.  Let $D$ be the
+    dense set in (ii) and observe that the set of open balls $B(u, \epsilon/M)$
+    over $u \in D$ provides an open cover of $C$.  As such, we can choose a finite
+    set $D_F \subset D$ such that $C$ is contained in $\cup_{u \in D_F} B(u,
+    \epsilon/M)$. Since, for each $u \in D_F$, the map
+    $t \mapsto T_t u$ is continuous on a compact set, it is also uniformly
+    continous.  As a result, we can select a $\delta_u > 0$ such that
+    %
+    \begin{equation*}
+        |s - t| < \delta_u \implies \| T_s u - T_t u \| < \epsilon.
+    \end{equation*}
+    %
+    Let $\delta$ be the minimum of $\{\delta_u\}_{u \in D_F}$ and $\epsilon / M$.
+    If we take $u, v \in C$ and $s, t \in K$ with $d((s, u), (t, v)) < \delta$, then,
+    choosing $w \in D_F$ with $\|u - w \| < \epsilon / M$, we have
+    %
+    \begin{align*}
+        \| T_s u - T_t v \|
+        & \leq \| T_s u - T_s w \| 
+            + \| T_s w - T_t w \| 
+                + \| T_t w - T_t v \|
+                \\
+        & = \| T_s (u - w) \| 
+            + \| T_s w - T_t w \| 
+                + \| T_t (w - v) \|
+        < M (\epsilon / M) + \epsilon + M (2 \epsilon / M) = 4 \epsilon.
+    \end{align*}
+    %
+    Hence $(t, u) \mapsto T_t u$ is
+            uniformly continuous on $K \times C$, as claimed.
+
+    ((iii) $\implies$ (i)) This claim is also obvious (take $C$ to be a
+    singleton).
+\end{proof}
+
+\begin{lemma}\label{l:ubfc}
+    If $(T_t)_{t \geq 0}$ is a $C_0$-semigroup on $E$, then
+        $\sup_{t \leq \delta} \| T_t \| < \infty$ for all $\delta > 0$.
+\end{lemma}
+
+\begin{proof}
+    We first claim there exists an $\epsilon > 0$ such that $
+    \sup_{t \leq \epsilon} \| T_t \| < \infty$.  Indeed, if no such $\epsilon$
+    exists, then there exists a sequence $t_n \to 0$ such that 
+    $\|T_{t_n}\|$ is unbounded.  But then, by the principle of uniform
+    boundedness, there exists a $u \in E$ such that $\|T_{t_n} u\|$ is
+    unbounded.  This contradicts the continuity property of $C_0$-semigroups.
+
+    Now let $\epsilon$ be as above and choose $M \in \NN$ with $\| T_t \| \leq
+    M$ whenever $t \leq \epsilon$.  Fix $k \in \NN$ and $t \leq k \epsilon$.
+    Since $T_t$ is $k$ compositions of $T_{t/k}$, and since $t/k < \epsilon$, 
+    the semigroup property yields $\| T_t \| \leq k M$.  Hence $t \mapsto T_t$
+    is bounded on $[0, k \epsilon]$.  Since $k$ was an arbitrary element of
+    $\NN$, this proves the claim in Lemma~\ref{l:ubfc}.
+\end{proof}
+
+\begin{lemma}\label{l:semiequivcon}
+    An AO semigroup $(T_t)_{t \geq 0}$ on $E$ is a 
+    $C_0$-semigroup on $E$ if and only if $\lim_{t \downarrow 0} T_t u = u$ for all $u \in E$.
+\end{lemma}
+
+\begin{proof}
+    Sufficiency is obvious.  Regarding necessity, fix $u \in E$ and $t > 0$.  We
+    need to show that $\|T_{t+h} u - T_t u\| \to 0$ as $h \to 0$.  Suppose first
+    that $h \downarrow 0$.  Then
+    %
+    \begin{equation*}
+        \|T_{t+h} u - T_t u\|  
+        = \|T_t T_h u - T_t u\|  
+        \leq \|T_t \| \| T_h u - u\|  \to 0.
+    \end{equation*}
+    %
+    If, on the other hand $h \uparrow 0$, then
+    %
+    \begin{equation*}
+        \|T_{t+h} u - T_t u\|  
+        = \|T_{t+h} u - T_{t + h} T_{-h} u\|  
+        \leq \|T_{t+h} \| \| u - T_{-h} u\| \to 0 .
+    \end{equation*}
+    %
+    In the last step we used the fact that $\|T_{t+h} \| $ is bounded over $h$
+    by Lemma~\ref{l:ubfc}.
+\end{proof}
+
+\begin{lemma}\label{l:aose}
+    Let $(T_t)_{t \geq 0}$ be an AO semigroup on $E$.
+    If there exists a dense subset $D$ of $E$ such that $\lim_{t \downarrow 0}
+    T_t u = u$ for all $u \in D$ and, in addition, $\sup_{t \leq \delta} \|T_t
+    \| < \infty$ for some $\delta > 0$, then $(T_t)_{t \geq 0}$ is a
+    $C_0$-semigroup on $E$.
+\end{lemma}
+
+\begin{proof}
+    Fix $u \in E$.  In view of Lemma~\ref{l:semiequivcon} it suffices to show
+    that, for a given sequence $t_n \downarrow 0$, we have $T_{t_n} u \to u$ as
+    $n \to 0$. 
+
+    To see that this holds, fix $t_n \downarrow 0$ and choose a compact set $K$ such
+    that $\{t_n\} \subset K$.  Since $K$ is compact, $K \ni t \mapsto T_t w$ is
+    continuous when $w \in D$, and $\|T_t \|$ is bounded over $t \in K$,
+    Lemma~\ref{l:contin} implies that $K \ni t \mapsto T_t u$ is continuous.
+    In particular, $T_{t_n} u \to u$ as $n \to 0$. 
+\end{proof}
+
+\bibliographystyle{apalike}
+\bibliography{sgs_bib}
+
+
+\end{document}
+
