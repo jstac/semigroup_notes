@@ -253,19 +253,20 @@
 
 \section{Definitions}
 
-Let $E$ be any set and let $\TT \coloneq (T_t)_{t \geq 0}$ be a family of
-self-maps on $E$. The pair $(E, \TT)$ is called a \navy{semidynamical system} if 
-$T_0$ is the idendity and $\TT$ has the semigroup property
+Let $E$ be any set and let $(S_t) \coloneq (S_t)_{t \geq 0}$ be a family of
+self-maps on $E$ with index $t \in \RR_+$. The pair $(E, (S_t))$ is called a \navy{semidynamical system} if 
+$S_0$ is the idendity and $(S_t)$ has the semigroup property
 %
 \begin{equation*}
-    T_{s + t} = T_t \circ T_s
+    S_{s + t} = S_t \circ S_s
     \quad \text{for all } s, t \in \RR_+.
 \end{equation*}
 %
-If $E$ is a vector space and each $T_t \in \TT$ is linear, then $(E, \TT)$ is
+If $E$ is a vector space and each $S_t$ is linear, then $(E, (S_t))$ is
 called an \navy{algebraic operator (AO) semigroup}.  If, in addition, $E$ is an
-Banach space and $t \mapsto T_t u$ is continuous for all $u \in E$, then $(E, \TT)$
-is called a \navy{$C_0$-semigroup}.  When $E$ is understood, we say that $\TT$
+Banach space and $t \mapsto S_t u$ is continuous for all $u \in E$, then $(E,
+(S_t))$
+is called a \navy{$C_0$-semigroup}.  When $E$ is understood, we say that $(S_t)$
 is a $C_0$-semigroup.
 
 
@@ -276,39 +277,39 @@ In what follows, $E$ is a Banach space and $\lL(E)$ is the set of bounded linear
 operators from $E$ to itself.  The symbol $\| \cdot \|$ denotes either the norm
 on $E$ or the operator norm on $\lL(E)$, depending on context.
 
-Let $K$ be a compact subset of $\RR$ and let $\{T_t\}_{t \in K}$ be a subset of
+Let $K$ be a compact subset of $\RR$ and let $\{S_t\}_{t \in K}$ be a subset of
 $\lL(E)$.  The following result is from \cite{engel2006short}.
 
 \begin{lemma}\label{l:contin}
     The following statements are equivalent:
     %
     \begin{enumerate}
-        \item The map $t \mapsto T_t u$ is continuous on $K$ for all $u \in E$.
-        \item $\|T_t\|$ is bounded over $t \in K$ and there exists a dense subset
-            $D$ of $E$ such that $t \mapsto T_t u$ is continuous on $K$ for all $u \in D$.
-        \item For any compact $C \subset E$, the map $(t, u) \mapsto T_t u$ is
+        \item The map $t \mapsto S_t u$ is continuous on $K$ for all $u \in E$.
+        \item $\|S_t\|$ is bounded over $t \in K$ and there exists a dense subset
+            $D$ of $E$ such that $t \mapsto S_t u$ is continuous on $K$ for all $u \in D$.
+        \item For any compact $C \subset E$, the map $(t, u) \mapsto S_t u$ is
             uniformly continuous on $K \times C$.
     \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-    ((i) $\implies$ (ii)) By (i), for any $u \in E$, the map $t \mapsto T_t u$ is
+    ((i) $\implies$ (ii)) By (i), for any $u \in E$, the map $t \mapsto S_t u$ is
     continuous on a compact set and, therefore, its image is bounded in $E$.  
-    Hence, by the uniform boundedness principle, $\|T_t\|$ is bounded over $t
+    Hence, by the uniform boundedness principle, $\|S_t\|$ is bounded over $t
     \in K$.  The statement in (ii) regarding continuity is obvious.
 
     ((ii) $\implies$ (iii)).  Fix compact $C \subset E$ and $\epsilon > 0$.
     We metrize $K \times C$ by setting $d((s, u), (t, v)) = \| u - v\| \vee |s-t|$.
-    Choose $M$ such that $\|T_t\| \leq M$ for all $t \in K$.  Let $D$ be the
+    Choose $M \in \NN$ such that $\|S_t\| \leq M$ for all $t \in K$.  Let $D$ be the
     dense set in (ii) and observe that the set of open balls $B(u, \epsilon/M)$
     over $u \in D$ provides an open cover of $C$.  As such, we can choose a finite
     set $D_F \subset D$ such that $C$ is contained in $\cup_{u \in D_F} B(u,
     \epsilon/M)$. Since, for each $u \in D_F$, the map
-    $t \mapsto T_t u$ is continuous on a compact set, it is also uniformly
-    continous.  As a result, we can select a $\delta_u > 0$ such that
+    $t \mapsto S_t u$ is continuous on a compact set, it is also uniformly
+    continous.  As a result, given $u \in D_F$, we can select a $\delta_u > 0$ such that
     %
     \begin{equation*}
-        |s - t| < \delta_u \implies \| T_s u - T_t u \| < \epsilon.
+        |s - t| < \delta_u \implies \| S_s u - S_t u \| < \epsilon.
     \end{equation*}
     %
     Let $\delta$ be the minimum of $\{\delta_u\}_{u \in D_F}$ and $\epsilon / M$.
@@ -316,92 +317,154 @@ $\lL(E)$.  The following result is from \cite{engel2006short}.
     choosing $w \in D_F$ with $\|u - w \| < \epsilon / M$, we have
     %
     \begin{align*}
-        \| T_s u - T_t v \|
-        & \leq \| T_s u - T_s w \| 
-            + \| T_s w - T_t w \| 
-                + \| T_t w - T_t v \|
+        \| S_s u - S_t v \|
+        & \leq \| S_s u - S_s w \| 
+            + \| S_s w - S_t w \| 
+                + \| S_t w - S_t v \|
                 \\
-        & = \| T_s (u - w) \| 
-            + \| T_s w - T_t w \| 
-                + \| T_t (w - v) \|
-        < M (\epsilon / M) + \epsilon + M (2 \epsilon / M) = 4 \epsilon.
+        & = \| S_s (u - w) \| 
+            + \| S_s w - S_t w \| 
+                + \| S_t (w - v) \|
+                \\
+        & < M (\epsilon / M) + \epsilon + M (2 \epsilon / M) = 4 \epsilon.
     \end{align*}
     %
-    Hence $(t, u) \mapsto T_t u$ is
+    Hence $(t, u) \mapsto S_t u$ is
             uniformly continuous on $K \times C$, as claimed.
 
-    ((iii) $\implies$ (i)) This claim is also obvious (take $C$ to be a
+    ((iii) $\implies$ (i)) This implication is trivial (take $C$ to be a
     singleton).
 \end{proof}
 
 \begin{lemma}\label{l:ubfc}
-    If $(T_t)_{t \geq 0}$ is a $C_0$-semigroup on $E$, then
-        $\sup_{t \leq \delta} \| T_t \| < \infty$ for all $\delta > 0$.
+    If $(S_t)_{t \geq 0}$ is a $C_0$-semigroup on $E$, then
+        $\sup_{t \leq \delta} \| S_t \| < \infty$ for all $\delta > 0$.
 \end{lemma}
 
 \begin{proof}
     We first claim there exists an $\epsilon > 0$ such that $
-    \sup_{t \leq \epsilon} \| T_t \| < \infty$.  Indeed, if no such $\epsilon$
+    \sup_{t \leq \epsilon} \| S_t \| < \infty$.  Indeed, if no such $\epsilon$
     exists, then there exists a sequence $t_n \to 0$ such that 
-    $\|T_{t_n}\|$ is unbounded.  But then, by the principle of uniform
-    boundedness, there exists a $u \in E$ such that $\|T_{t_n} u\|$ is
+    $\|S_{t_n}\|$ is unbounded.  But then, by the principle of uniform
+    boundedness, there exists a $u \in E$ such that $\|S_{t_n} u\|$ is
     unbounded.  This contradicts the continuity property of $C_0$-semigroups.
 
-    Now let $\epsilon$ be as above and choose $M \in \NN$ with $\| T_t \| \leq
+    Now let $\epsilon$ be as above and choose $M \in \NN$ with $\| S_t \| \leq
     M$ whenever $t \leq \epsilon$.  Fix $k \in \NN$ and $t \leq k \epsilon$.
-    Since $T_t$ is $k$ compositions of $T_{t/k}$, and since $t/k < \epsilon$, 
-    the semigroup property yields $\| T_t \| \leq k M$.  Hence $t \mapsto T_t$
+    Since $S_t$ is $k$ compositions of $S_{t/k}$, and since $t/k < \epsilon$, 
+    the semigroup property yields $\| S_t \| \leq k M$.  Hence $t \mapsto S_t$
     is bounded on $[0, k \epsilon]$.  Since $k$ was an arbitrary element of
     $\NN$, this proves the claim in Lemma~\ref{l:ubfc}.
 \end{proof}
 
 \begin{lemma}\label{l:semiequivcon}
-    An AO semigroup $(T_t)_{t \geq 0}$ on $E$ is a 
-    $C_0$-semigroup on $E$ if and only if $\lim_{t \downarrow 0} T_t u = u$ for all $u \in E$.
+    An AO semigroup $(S_t)_{t \geq 0}$ on $E$ is a 
+    $C_0$-semigroup on $E$ if and only if $\lim_{t \downarrow 0} S_t u = u$ for all $u \in E$.
 \end{lemma}
 
 \begin{proof}
     Sufficiency is obvious.  Regarding necessity, fix $u \in E$ and $t > 0$.  We
-    need to show that $\|T_{t+h} u - T_t u\| \to 0$ as $h \to 0$.  Suppose first
+    need to show that $\|S_{t+h} u - S_t u\| \to 0$ as $h \to 0$.  Suppose first
     that $h \downarrow 0$.  Then
     %
     \begin{equation*}
-        \|T_{t+h} u - T_t u\|  
-        = \|T_t T_h u - T_t u\|  
-        \leq \|T_t \| \| T_h u - u\|  \to 0.
+        \|S_{t+h} u - S_t u\|  
+        = \|S_t S_h u - S_t u\|  
+        \leq \|S_t \| \| S_h u - u\|  \to 0.
     \end{equation*}
     %
     If, on the other hand $h \uparrow 0$, then
     %
     \begin{equation*}
-        \|T_{t+h} u - T_t u\|  
-        = \|T_{t+h} u - T_{t + h} T_{-h} u\|  
-        \leq \|T_{t+h} \| \| u - T_{-h} u\| \to 0 .
+        \|S_{t+h} u - S_t u\|  
+        = \|S_{t+h} u - S_{t + h} S_{-h} u\|  
+        \leq \|S_{t+h} \| \| u - S_{-h} u\| \to 0 .
     \end{equation*}
     %
-    In the last step we used the fact that $\|T_{t+h} \| $ is bounded over $h$
+    In the last step we used the fact that $\|S_{t+h} \| $ is bounded over $h$
     by Lemma~\ref{l:ubfc}.
 \end{proof}
 
 \begin{lemma}\label{l:aose}
-    Let $(T_t)_{t \geq 0}$ be an AO semigroup on $E$.
+    Let $(S_t)_{t \geq 0}$ be an AO semigroup on $E$.
     If there exists a dense subset $D$ of $E$ such that $\lim_{t \downarrow 0}
-    T_t u = u$ for all $u \in D$ and, in addition, $\sup_{t \leq \delta} \|T_t
-    \| < \infty$ for some $\delta > 0$, then $(T_t)_{t \geq 0}$ is a
-    $C_0$-semigroup on $E$.
+    S_t u = u$ for all $u \in D$ and, in addition, $\sup_{t \leq \delta} \|S_t
+    \| < \infty$ for some $\delta > 0$, then $(S_t)_{t \geq 0}$ is a
+    $C_0$-semigroup.
 \end{lemma}
 
 \begin{proof}
-    Fix $u \in E$.  In view of Lemma~\ref{l:semiequivcon} it suffices to show
-    that, for a given sequence $t_n \downarrow 0$, we have $T_{t_n} u \to u$ as
+    Fix $u \in E$.  By Lemma~\ref{l:semiequivcon} it suffices to show
+    that, for a given sequence $t_n \downarrow 0$, we have $S_{t_n} u \to u$ as
     $n \to 0$. 
-
-    To see that this holds, fix $t_n \downarrow 0$ and choose a compact set $K$ such
-    that $\{t_n\} \subset K$.  Since $K$ is compact, $K \ni t \mapsto T_t w$ is
-    continuous when $w \in D$, and $\|T_t \|$ is bounded over $t \in K$,
-    Lemma~\ref{l:contin} implies that $K \ni t \mapsto T_t u$ is continuous.
-    In particular, $T_{t_n} u \to u$ as $n \to 0$. 
+    To see that this holds, fix $t_n \downarrow 0$ and choose a compact subset
+    $K$ of $\RR_+$ such
+    that $\{t_n\} \subset K$.  Since $K$ is compact, $K \ni t \mapsto S_t w$ is
+    continuous when $w \in D$, and $\|S_t \|$ is bounded over $t \in K$,
+    Lemma~\ref{l:contin} implies that $K \ni t \mapsto S_t u$ is continuous.
+    In particular, $S_{t_n} u \to u$ as $n \to 0$. 
 \end{proof}
+
+
+
+\section{Examples}
+
+Let $C_0(\RR_+)$ be the set of all continuous real-valued functions $f$ on
+$\RR_+$ with $f(x) \to 0$ as $x \to \infty$.  The set $C_0(\RR_+)$ is paired
+with the supremum norm.  Consider the \navy{left
+translation semigroup} given by $(S^\ell_t f)(x) = f(x + t)$.
+
+\begin{lemma}\label{l:ltsemi}
+    $(S^\ell_t)$ is a $C_0$-semigroup on $C_0(\RR_+)$.  
+\end{lemma}
+
+\begin{proof}
+    Evidently $S^\ell_0 f = f$.  The semigroup property holds because, for $s, t
+    \geq 0$, we have
+    %
+    \begin{equation*}
+        (S^\ell_{s + t} f)(x) = f(x + s + t) = (S^\ell_t (S^\ell_s f))(x).
+    \end{equation*}
+    %
+    Regarding continuity, fix $f \in C_0(\RR_+)$ and let $(t_n)$ be a real sequence
+    with $t_n \downarrow 0$.  Fix $\epsilon > 0$.  Since $f$ is uniformly
+    continuous, we can select a $\delta > 0$ such that $|f(x) - f(y)| < \epsilon$
+    whenever $|x-y|<\delta$.  Let $N \in \NN$ be such that $t_n < \delta$ when
+    $n \geq N$.  Then, for $n \geq N$,
+    %
+    \begin{equation*}
+        \| S^\ell_{t_n} f - f \|
+        = \sup_x | f(x + t_n)  - f(x) |
+        < \epsilon.
+    \end{equation*}
+    %
+    Hence $S^\ell_t f \downarrow f$ and $(S^\ell_t)$ is a $C_0$-semigroup.
+\end{proof}
+
+
+Let $C_0^1(\RR_+)$ be the set of all continuously differentiable $f \in
+C_0(\RR+)$ with $f' \in C_0(\RR+)$.  The set $C_0^1(\RR_+)$ is paired
+with the norm $\|f\| = \sup_x |f(x)| + \sup_x |f'(x)|$.  
+
+\begin{lemma}\label{l:ltsemi2}
+    $(S^\ell_t)$ is a $C_0$-semigroup on $C_0^1(\RR_+)$.  
+\end{lemma}
+
+\begin{proof}
+    In view of Lemma~\ref{l:ltsemi}, we only need to check continuity.
+    Fixing $f \in C_0^1(\RR_+)$, we have
+    %
+    \begin{equation*}
+        \| S^\ell_t f - f \|
+        = \sup_x | f(x + t)  - f(x) | + \sup_x | f'(x + t)  - f'(x) |
+    \end{equation*}
+    %
+    Since $f$ and $f'$ are both in $C_0(\RR_+)$, the proof of
+    Lemma~\ref{l:ltsemi2} implies that both terms on the right hand side
+    converge to zero as $t \downarrow 0$.  Hence continuity holds.
+\end{proof}
+
+
 
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
