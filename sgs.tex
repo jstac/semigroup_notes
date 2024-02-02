@@ -306,7 +306,7 @@ $\lL(E)$.  The following result is from \cite{engel2006short}.
     set $D_F \subset D$ such that $C$ is contained in $\cup_{u \in D_F} B(u,
     \epsilon/M)$. Since, for each $u \in D_F$, the map
     $t \mapsto S_t u$ is continuous on a compact set, it is also uniformly
-    continous.  As a result, given $u \in D_F$, we can select a $\delta_u > 0$ such that
+    continuous.  As a result, given $u \in D_F$, we can select a $\delta_u > 0$ such that
     %
     \begin{equation*}
         |s - t| < \delta_u \implies \| S_s u - S_t u \| < \epsilon.
@@ -409,6 +409,9 @@ $\lL(E)$.  The following result is from \cite{engel2006short}.
 
 \section{Examples}
 
+
+\subsection{Left-shift semigroups}
+
 Let $C_0(\RR_+)$ be the set of all continuous real-valued functions $f$ on
 $\RR_+$ with $f(x) \to 0$ as $x \to \infty$.  The set $C_0(\RR_+)$ is paired
 with the supremum norm.  Consider the \navy{left
@@ -460,11 +463,129 @@ with the norm $\|f\| = \sup_x |f(x)| + \sup_x |f'(x)|$.
     \end{equation*}
     %
     Since $f$ and $f'$ are both in $C_0(\RR_+)$, the proof of
-    Lemma~\ref{l:ltsemi2} implies that both terms on the right hand side
+    Lemma~\ref{l:ltsemi} implies that both terms on the right hand side
     converge to zero as $t \downarrow 0$.  Hence continuity holds.
 \end{proof}
 
+\subsection{Right-shift semigroups}\label{ss:rssemi}
 
+Here we discuss right-shift semigroups.  We will embed them in a space of
+integrable functions.  Below $\lambda$ denotes Lebesgue measure.
+
+Let $C_c(\RR)$ be the set of all continuous real-valued functions $f$ on
+$\RR$ that vanish off a compact set.  Let $L_1(\RR)$ be the set of 
+Borel measurable real-valued functions on $\RR$ with $\| f \| \coloneq \int
+|f| \diff \lambda < \infty$.  Let $S_t$ be the linear operator on $L_1(\RR)$
+defined by 
+%
+\begin{equation*}
+    (S_t f)(x) = f(x + t)
+    \qquad (x \in \RR, \; t \geq 0).
+\end{equation*}
+%
+
+\begin{lemma}\label{l:rtsemi}
+    $(S^\ell_t)$ is a $C_0$-semigroup on $L_1(\RR)$.  
+\end{lemma}
+
+\begin{proof}
+    It is simple to confirm that $(S_t)$ is an AO semigroup on $L_1(\RR)$.
+    Regarding continuity, note that $\|S_t f\| = \int |f(x-t)| \diff x = \| f\|$, so
+    $\|S_t\|$ is bounded in $t$.  Since $C_c(\RR)$ is dense in $L_1(\RR)$ under this
+    norm, Lemma~\ref{l:aose} implies that, to show $(S_t)$ is a $C_0$-semigroup
+    on $L_1(\RR)$, it suffices to show that $\| S_t f - f \| \to 0$ for any $f \in
+    C_c(\RR)$.
+
+    To this end, fix $f \in C_c(\RR)$ and let $K$ be a compact set such that $f$
+    vanishes off $K$.  Fix $\epsilon > 0$.  By uniform continuity, we can take a
+    $\delta > 0$ such that $|x-y| < \delta$ implies $|f(x) - f(y)| < \epsilon /
+    \lambda(K)$.  If $t < \delta$, then
+    %
+    \begin{equation*}
+        \| S_t f - f \| 
+        = \int | f(x-t) - f(x) | \diff x
+        \leq \lambda(K) \frac{\epsilon}{\lambda(K)} = \epsilon.
+    \end{equation*}
+    %
+    This completes the proof of $C_0$-continuity of $(S_t)$ on $L_1(\RR)$.
+\end{proof}
+
+
+\subsection{Multiplication semigroups}\label{ss:multisemi}
+
+Let $(\Xsf, \bB, \mu)$ be a $\sigma$-finite measure space and let
+$\phi$ be a measurable map from $\Xsf$ to $\RR_+$.  Define
+%
+\begin{equation*}
+    S_t f = \exp(-t \phi(x)) f(x) 
+    \qquad (x \in \Xsf, \; t \geq 0).
+\end{equation*}
+%
+The family $(S_t)$ is called a \navy{multiplication semigroup}.
+
+\begin{lemma}\label{l:multisemi}
+    $(S_t)$ is a $C_0$-semigroup on $L_1(\Xsf, \bB, \mu)$.
+\end{lemma}
+
+\begin{proof}
+    It is simple to confirm that $(S_t)$ is an AO semigroup on $L_1(\RR)$.
+    Regarding continuity, fix $f \in L_1(\Xsf, \bB, \mu)$ and observe that
+    %
+    \begin{equation*}
+        \| S_t f - f \|
+        = \int |f(x)| | \exp(-t\phi(x)) - 1 | \mu(\diff x).
+    \end{equation*}
+    %
+    It follows from the dominated convergence theorem that this integral
+    converges to zero as $t \downarrow 0$.  Hence $(S_t)$ is a $C_0$-semigroup
+    on $L_1(\Xsf, \bB, \mu)$.
+\end{proof}
+
+
+
+\subsection{Uniformly continuous semigroups}\label{ss:ucsemi}
+
+Let $E$ be a Banach space and let $\lL(E)$ be the bounded linear operators on $E$.
+Recall that the \navy{exponential} of $A \in \lL(E)$ is given by
+%
+\begin{equation*}
+    \exp(A) \coloneq \sum_{n=0}^\infty \frac{A^n}{n!}.
+\end{equation*}
+%
+Fixing $A \in \lL(E)$, consider the family of linear operators on $E$ given
+by 
+%
+\begin{equation*}
+    S_t u = \exp(t A) u
+    \qquad (u \in E, \; t \geq 0)
+\end{equation*}
+%
+We recall that the exponential function $\phi(t) \coloneq \exp(t A)$ 
+%
+\begin{enumerate}
+    \item obeys $\phi(0) = I$ and $\phi(s + t) = \phi(t) \phi(s)$ for all $s, t
+        \in \RR$; and
+    \item is continuous as a map from $\RR$ to $\lL(E)$.
+\end{enumerate}
+%
+From (i) we can easily confirm that $(S_t)$ is an algebraic operator semigroup
+on $E$.  Regarding continuity, (i) and (ii) imply that
+%
+\begin{equation}\label{eq:ucsemi}
+    \lim_{t \downarrow 0} \| S_t - I \| = 0.
+\end{equation}
+%
+It follows from \eqref{eq:ucsemi} that $(S_t)$ is a $C_0$-semigroup on $E$.
+
+Any operator semigroup $(S_t)$ on $E$ obeying \eqref{eq:ucsemi} is called a
+\navy{uniformly continuous semigroup}.  In fact no other examples exist:
+
+\begin{theorem}\label{t:ucsemi}
+    If $(S_t)$ is a uniformly continuous semigroup on $E$, then there exists an
+    $A \in \lL(E)$ such that $S_t u = \exp(t A) u$ for all $u \in E$ and $t \geq 0$.
+\end{theorem}
+
+The proof of Theorem~\ref{t:ucsemi} can be found 2(b) of \cite{engel2006short}.
 
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
