@@ -251,7 +251,16 @@
 
 \maketitle
 
-\section{Definitions}
+
+
+
+
+
+\section{Introduction to Semigroups}
+
+Add roadmap.
+
+\subsection{Definitions}
 
 Let $E$ be any set and let $(S_t) \coloneq (S_t)_{t \geq 0}$ be a family of
 self-maps on $E$ with index $t \in \RR_+$. The pair $(E, (S_t))$ is called a \navy{semidynamical system} if 
@@ -262,16 +271,18 @@ $S_0$ is the idendity and $(S_t)$ has the semigroup property
     \quad \text{for all } s, t \in \RR_+.
 \end{equation*}
 %
-If $E$ is a vector space and each $S_t$ is linear, then $(E, (S_t))$ is
-called an \navy{algebraic operator (AO) semigroup}.  If, in addition, $E$ is an
-Banach space and $t \mapsto S_t u$ is continuous for all $u \in E$, then $(E,
-(S_t))$
+Given $u \in E$, the function $t \mapsto S_t u$ is called the \navy{orbit} or
+\navy{trajectory} of $u$ under $(S_t)$.
+
+If $E$ is a vector space and each $S_t$ is linear, then $(E, (S_t))$ is called
+an \navy{algebraic operator (AO) semigroup}.  If, in addition, $E$ is an Banach
+space and $t \mapsto S_t u$ is continuous for all $u \in E$, then $(E, (S_t))$
 is called a \navy{$C_0$-semigroup}.  When $E$ is understood, we say that $(S_t)$
 is a $C_0$-semigroup.
 
 
 
-\section{Continuity results}
+\subsection{Continuity results}
 
 In what follows, $E$ is a Banach space and $\lL(E)$ is the set of bounded linear
 operators from $E$ to itself.  The symbol $\| \cdot \|$ denotes either the norm
@@ -407,26 +418,26 @@ $\lL(E)$.  The following result is from \cite{engel2006short}.
 
 
 
-\section{Examples}
+\subsection{Examples}
 
 
-\subsection{Left-shift semigroups}
+\subsubsection{Left-shift semigroups}
 
 Let $C_0(\RR_+)$ be the set of all continuous real-valued functions $f$ on
 $\RR_+$ with $f(x) \to 0$ as $x \to \infty$.  The set $C_0(\RR_+)$ is paired
 with the supremum norm.  Consider the \navy{left
-translation semigroup} given by $(S^\ell_t f)(x) = f(x + t)$.
+translation semigroup} given by $(S_t f)(x) = f(x + t)$.
 
 \begin{lemma}\label{l:ltsemi}
-    $(S^\ell_t)$ is a $C_0$-semigroup on $C_0(\RR_+)$.  
+    $(S_t)$ is a $C_0$-semigroup on $C_0(\RR_+)$.  
 \end{lemma}
 
 \begin{proof}
-    Evidently $S^\ell_0 f = f$.  The semigroup property holds because, for $s, t
+    Evidently $S_0 f = f$.  The semigroup property holds because, for $s, t
     \geq 0$, we have
     %
     \begin{equation*}
-        (S^\ell_{s + t} f)(x) = f(x + s + t) = (S^\ell_t (S^\ell_s f))(x).
+        (S_{s + t} f)(x) = f(x + s + t) = (S_t (S_s f))(x).
     \end{equation*}
     %
     Regarding continuity, fix $f \in C_0(\RR_+)$ and let $(t_n)$ be a real sequence
@@ -436,12 +447,12 @@ translation semigroup} given by $(S^\ell_t f)(x) = f(x + t)$.
     $n \geq N$.  Then, for $n \geq N$,
     %
     \begin{equation*}
-        \| S^\ell_{t_n} f - f \|
+        \| S_{t_n} f - f \|
         = \sup_x | f(x + t_n)  - f(x) |
         < \epsilon.
     \end{equation*}
     %
-    Hence $S^\ell_t f \downarrow f$ and $(S^\ell_t)$ is a $C_0$-semigroup.
+    Hence $S_t f \downarrow f$ and $(S_t)$ is a $C_0$-semigroup.
 \end{proof}
 
 
@@ -450,7 +461,7 @@ C_0(\RR+)$ with $f' \in C_0(\RR+)$.  The set $C_0^1(\RR_+)$ is paired
 with the norm $\|f\| = \sup_x |f(x)| + \sup_x |f'(x)|$.  
 
 \begin{lemma}\label{l:ltsemi2}
-    $(S^\ell_t)$ is a $C_0$-semigroup on $C_0^1(\RR_+)$.  
+    $(S_t)$ is a $C_0$-semigroup on $C_0^1(\RR_+)$.  
 \end{lemma}
 
 \begin{proof}
@@ -458,7 +469,7 @@ with the norm $\|f\| = \sup_x |f(x)| + \sup_x |f'(x)|$.
     Fixing $f \in C_0^1(\RR_+)$, we have
     %
     \begin{equation*}
-        \| S^\ell_t f - f \|
+        \| S_t f - f \|
         = \sup_x | f(x + t)  - f(x) | + \sup_x | f'(x + t)  - f'(x) |
     \end{equation*}
     %
@@ -467,7 +478,7 @@ with the norm $\|f\| = \sup_x |f(x)| + \sup_x |f'(x)|$.
     converge to zero as $t \downarrow 0$.  Hence continuity holds.
 \end{proof}
 
-\subsection{Right-shift semigroups}\label{ss:rssemi}
+\subsubsection{Right-shift semigroups}\label{ss:rssemi}
 
 Here we discuss right-shift semigroups.  We will embed them in a space of
 integrable functions.  Below $\lambda$ denotes Lebesgue measure.
@@ -485,7 +496,7 @@ defined by
 %
 
 \begin{lemma}\label{l:rtsemi}
-    $(S^\ell_t)$ is a $C_0$-semigroup on $L_1(\RR)$.  
+    $(S_t)$ is a $C_0$-semigroup on $L_1(\RR)$.  
 \end{lemma}
 
 \begin{proof}
@@ -511,7 +522,7 @@ defined by
 \end{proof}
 
 
-\subsection{Multiplication semigroups}\label{ss:multisemi}
+\subsubsection{Multiplication semigroups}\label{ss:multisemi}
 
 Let $(\Xsf, \bB, \mu)$ be a $\sigma$-finite measure space and let
 $\phi$ be a measurable map from $\Xsf$ to $\RR_+$.  Define
@@ -543,14 +554,14 @@ The family $(S_t)$ is called a \navy{multiplication semigroup}.
 
 
 
-\subsection{Uniformly continuous semigroups}\label{ss:ucsemi}
+\subsubsection{Uniformly continuous semigroups}\label{ss:ucsemi}
 
 Let $E$ be a Banach space and let $\lL(E)$ be the bounded linear operators on $E$.
 Recall that the \navy{exponential} of $A \in \lL(E)$ is given by
 %
-\begin{equation*}
+\begin{equation}\label{eq:expfun}
     \exp(A) \coloneq \sum_{n=0}^\infty \frac{A^n}{n!}.
-\end{equation*}
+\end{equation}
 %
 Fixing $A \in \lL(E)$, consider the family of linear operators on $E$ given
 by 
@@ -586,6 +597,216 @@ Any operator semigroup $(S_t)$ on $E$ obeying \eqref{eq:ucsemi} is called a
 \end{theorem}
 
 The proof of Theorem~\ref{t:ucsemi} can be found 2(b) of \cite{engel2006short}.
+
+
+\section{Generators and Resolvents}
+
+Add roadmap.
+
+\subsection{Preliminaries}\label{ss:prel}
+
+Let $u$ be a map from $\RR_+$ to $E$, where $E$ is a Banach space. If, for some
+$t > 0$, the limit
+%
+\begin{equation*}
+    \dot u(t)
+    \coloneq \frac{\diff }{\diff t} u(t)
+    \coloneq \lim_{h \to 0} \frac{\| u(t + h) - u(t) \|}{h}
+\end{equation*}
+%
+exists, then we say that $u$ is \navy{differentiable} at $t$ and call $\dot u(t)$
+the \navy{derivative} of $u$ at $t$.  In the case where $t=0$ we use the same
+definitions after replacing $h \to 0$ with $h \downarrow 0$.
+We say that $u$ is \navy{differentiable} on $\RR_+$ if $u$ is differentiable at
+$t$ for all $t \in \RR_+$.
+
+\begin{example}
+    Consider the exponential function $e(t) = \exp(t A)$ from \S\ref{ss:ucsemi},
+    where $t \in \RR_+$ and $A \in \lL(E)$.  We have
+    %
+    \begin{equation*}
+        \frac{e(t + h) - e(t)}{h}
+        = \frac{\exp(tA + hA) - \exp(tA)}{h}
+        = \exp(tA) \frac{\exp(hA) - I}{h}
+    \end{equation*}
+    %
+    Using the definition \eqref{eq:expfun} and taking the limit as $h \downarrow
+    0$ gives $\dot e(t) = \exp(tA) A $.  A small variation on the argument above
+    shows that $\dot e(t) = A \exp(tA)$ also holds.
+\end{example}
+
+Let $u$ be a continuous map from $[a, b]$ to $E$.  We call $I$ the
+(Riemann) \navy{integral} of $u$ over $[a,b]$ and write $I = \int_a^b u(s) \diff s$ if,
+for every $\epsilon > 0$, there exists  a partition 
+$a = t_0 < t_1 < \cdots t_{k+1} = b$ of $[a, b]$ and points $\{s_i\}$ with
+$t_{i-1} < s_i < t_i$ such that
+%
+\begin{equation*}
+    \left\|
+        \;
+        \sum_{i=0}^{k+1} u(s_i) (t_i - t_{i-1})
+        - I
+        \;
+    \right\| < \epsilon
+\end{equation*}
+%
+When $u$ is continuous on $\RR_+$ and $a, b \in \RR_+$ with $a < b$, the
+integral has the following elementary properties:
+%
+\begin{enumerate}
+    \item $\int_a^c u(s) \diff s 
+        = \int_a^b u(s) \diff s + \int_b^c u(s) \diff s$ whenever $a < b < c$.
+    \item $\int_a^b u(s + c) \diff s = \int_{a+c}^{b+c} u(s)
+        \diff s$ whenever $c \geq 0$.
+    \item $\| \int_a^b u(s) \diff s \| \leq \int_a^b \|
+        u(s)  \| \diff s$.
+    \item $u(t) = \lim_{h \to 0} \, (1/h) \int_t^{t+h} u(s) \diff s$ for all $t \in \RR_+$.
+\end{enumerate}
+
+
+In what follows, when discussing maps such as $u$ given above,
+we often write $u_t$ and $\dot u_t$ instead of $u(t)$ and $\dot u(t)$.
+
+
+\subsection{Infinitesmial Generators}
+
+Let $E$ be a Banach space and let $(S_t)$ be an AO semigroup.  Set
+%
+\begin{equation*}
+    \dD(A) =
+    \left\{
+        u \in E \st 
+        \lim_{t \downarrow 0} \frac{S_t u - u}{t} \text{ exists}
+    \right\}
+    \quad \text{and} \quad
+       Au = \lim_{t \downarrow 0} \frac{S_t u - u}{t} \text{ on }
+       \dD(A).
+\end{equation*}
+
+The map $A$ is called the \navy{infinitesimal generator} of $(S_t)$ and $\dD(A)$
+is its domain.  
+
+\begin{lemma}\label{l:dals}
+    The set $\dD(A)$ is a linear subspace of $E$ and $A$ is linear on $\dD(A)$.
+\end{lemma}
+
+\begin{proof}
+    Fix $\alpha, \beta \in \RR$ and $u,v \in \dD(A)$.  Let $w = \alpha u + \beta v$.
+    Since
+    %
+    \begin{equation*}
+        \frac{S_t w - w}{t} 
+        = \alpha \frac{S_t  u - u}{t} + \beta \frac{S_t  v - v}{t},
+    \end{equation*}
+    %
+    we see that $w \in \dD(A)$ and, moreover, $Aw = \alpha Au + \beta Av$.
+\end{proof}
+
+The next result shows that any trajectory of $(S_t)$ starting from a point $\bar
+u$ in $\dD(A)$ obeys a linear differential equation evolving in $\dD(A)$, with $A$
+as the ``vector field.''
+
+
+\begin{lemma}\label{l:diffpath}
+    If $(S_t)$ is a $C_0$-semigroup, $u_0 \in E$ and $u_t = S_t u_0$
+    for all $t \geq 0$, then, for all $t \geq 0$,
+    %
+    \begin{equation*}
+        \int_0^t u_s \diff s \in \dD(A) \quad \text{and} \quad
+        u_t = u_0 + A \int_0^t u_s \diff s.
+    \end{equation*}
+    %
+\end{lemma}
+
+\begin{proof}
+    Fix $u_0 \in E$ and let $u_t$ be as defined in the lemma.  
+\end{proof}
+
+
+\begin{theorem}\label{t:diffpath}
+    If $(S_t)$ is a $C_0$-semigroup, $u_0 \in \dD(A)$ and $u_t = S_t u_0$
+    for all $t \geq 0$, then,  for all $t \geq 0$,
+    %
+    \begin{enumerate}
+        \item $u_t \in \dD(A)$,
+        \item the derivative $\dot u_t$ exists, and $\dot u_t = A u_t$.
+    \end{enumerate}
+    %
+\end{theorem}
+
+\begin{proof}
+    Fix $u_0 \in \dD(A)$ and let $u_t = S_t u_0$.
+    Claim (i) follows from (ii) because, when $u_t$ is differentiable, 
+    %
+    \begin{equation*}
+         \frac{S_h u_t - u_t}{h}
+         = \frac{u_{t+h} - u_t}{h} \to \dot u_t \quad \text{as } h \downarrow 0.
+    \end{equation*}
+    %
+    Regarding (ii), fix $t > 0$  (the case $t=0$ is trivial) and $h > 0$.  Using
+    continuity of $S_t$ and taking $h \downarrow 0$, we have
+    %
+    \begin{equation*}
+         \frac{u_{t+h} - u_t}{h} = S_t \frac{u_h - u_0}{h} \to S_t A u_0.
+    \end{equation*}
+    %
+    Regarding the left-hand derivative, we take $0 < h < t$ and use
+    %
+    \begin{equation*}
+        \frac{u_{t-h} - u_t}{-h} - S_t A u_0
+        = S_{t-h} \left( \frac{u_0 - u_h}{-h} - S_h A u_0 \right)
+    \end{equation*}
+    %
+    and the boundedness of $\| S_t \|$ over bounded sets (Lemma~\ref{l:ubfc}) to
+    obtain a finite $M$ such that
+    %
+    \begin{equation*}
+        \left\|
+            \frac{u_{t-h} - u_t}{-h} - S_t A u_0
+        \right\|
+        \leq M
+        \left\|
+            \frac{u_0 - u_h}{-h} - A u_0
+        \right\|
+        +
+        M
+        \left\|
+            A u_0 - S_h A u_0
+        \right\|.
+    \end{equation*}
+    %
+    Both terms on the right converge to zero in $h$, so we have proved that
+    the derivative $\dot u_t$ of $u_t$ exists and is equal to $S_t A u_0$.
+
+    Since $u_t = S_t u_0$, our proof will be complete if we can show that 
+    %
+    \begin{equation}\label{eq:stuat}
+        A S_t u_0 = S_t A u_0 
+        \qquad (t \geq 0, \; u_0 \in \dD(A))
+    \end{equation}
+    %
+    But this follows easily from 
+    %
+    \begin{equation*}
+        A S_t u_0
+        = \lim_{h \downarrow 0} \frac{S_h S_t u_0 - S_t u_0}{h}
+        = \lim_{h \downarrow 0} \frac{S_t S_h u_0 - S_t u_0}{h}
+        = \lim_{h \downarrow 0} S_t \frac{S_h u_0 - u_0}{h}
+    \end{equation*}
+    %
+    and continuity of $t \mapsto S_t$.
+\end{proof}
+
+\begin{theorem}\label{t:dense}
+    If $(S_t)$ is a $C_0$-semigroup, then $\dD(A)$ is dense in $E$.
+\end{theorem}
+
+\begin{proof}
+    To see that $\dD(A)$ is dense, fix $u_0 \in E$, set $u_t = S_t u_0$
+    and let $v_h = (1/h) \int_0^h u_s \diff s$ for all $h > 0$. By the results
+    in \S\ref{ss:prel}, we have $v_h \to u_0$ as $h \downarrow 0$.  Moreover, by
+    XXX, $v_h$ is in $\dD(A)$ for all $h > 0$.   Hence $\dD(A)$ is dense in $E$.
+\end{proof}
 
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
