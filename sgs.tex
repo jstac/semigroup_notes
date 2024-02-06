@@ -337,22 +337,30 @@ of $A \in \lL(E)$ is given by
 \end{equation}
 %
 
-\begin{lemma}[Properties of the matrix exponential]\label{l:expcom}
-    Let $A$ and $B$ be elements of $\lL(E)$.  The following properties hold.
+\begin{lemma}\label{l:expcom}
+    Let $A$ and $B$ be elements of $\lL(E)$.  The following properties hold:
     %
     \begin{enumerate}
         \item $\exp(A)$ is a well-defined element of $\lL(E)$  and $\| \exp(A) \| \leq \exp(\|A\|)$.
         \item If $A$ and $B$ commute (i.e. $AB = BA$), then $\exp(A + B) =
             \exp(A) \exp(B)$.
         \item If $m$ is any positive integer, then $\exp(mA) = (\exp(A))^m$.
-        \item The function $e(t) \coloneq \exp(tA)$ from $\RR$ to $\lL(E)$ is differentiable in $t$,
-            with
+    \end{enumerate}
+    %
+\end{lemma}
+
+\begin{lemma}\label{l:expcom2}
+    Fix $A \in \lL(E)$ and consider the function $e(t) \coloneq \exp(tA)$ from
+    $\RR$ to $\lL(E)$.  The following statements are true:
+    %
+    \begin{enumerate}
+        \item The map $e$ is differentiable in $t$, with
             %
             \begin{equation}\label{eq:matdiffl}
                 \dot e(t) = A e(t) = e(t) A.
             \end{equation}
             %
-        \item The fundamental theorem of calculus holds for $e(t) \coloneq \exp(tA)$, in the sense that
+        \item The fundamental theorem of calculus holds, in the sense that
             %
             \begin{equation}\label{eq:ftcexp}
                 e(b) 
@@ -362,6 +370,8 @@ of $A \in \lL(E)$ is given by
     \end{enumerate}
     %
 \end{lemma}
+
+
 
 For example, to prove (iv) we fix $A \in \lL(E)$ and consider $e(t) = \exp(t
 A)$. Applying (ii) yields
