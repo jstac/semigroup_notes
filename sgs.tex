@@ -251,26 +251,52 @@
 \maketitle
 
 
-
+In what follows, 
+%
+\begin{itemize}
+    \item $E$ denotes a real Banach space,
+    \item $\lL(E)$ is the set of bounded linear operators on $E$,
+    \item $E'$ represents the dual space (i.e., the set of bounded linear
+        functionals on $E$),
+    \item $\| \cdot \|$ denotes either the norm on $E$ or the operator norm on
+        $\lL(E)$, depending on context, and
+    \item $\cC$ is the set of continuous functions from $\RR_+$ to $E$.
+\end{itemize}
 
 \section{Linear Differential Equations and Exponential Paths}
 
-This section gives a discussion of linear ordinary differential equations (ODEs)
-in Banach space when the ``vector field'' that drives the ODE is a
-\emph{bounded} linear operator.  (This includes the finite-dimensional case,
-since all linear operators on finite-dimensional spaces are bounded.)
+This section contains a brief review of linear ordinary differential equations
+(ODEs) in Banach space when the linear operator that defines the ODE is a
+bounded linear operator.
 
-These boundedness restriction leaves out many interesting and important
-processes.  At the same time, it illustrates the ideal case, and some of the
-properties we hope to discover for the solutions of general ODEs (driven by
-possibly unbounded linear operators) in Banach space.  
+To set the stage, recall that an (autonomous) linear ODE in $\RR^n$ has the form
+%
+\begin{equation*}
+    \dot x(t) = A x(t)
+\end{equation*}
+%
+where $x(t)$ is an $n$-vector for each $t$ and $A$ is $n \times n$.  The matrix
+$A$ is sometimes called the ``vector field.''  A first step to extend these
+concepts to an abstract Banach space is to set $\dot x(t) = A x(t)$, where
+$x(t)$ is understood as a point in the space and $A$ is a \emph{bounded} linear
+operator from the space to itself.  (This includes the finite-dimensional case,
+including the one-dimensional case as taught in elementary lectures on ODEs,
+since all linear operators on finite-dimensional spaces are bounded.  The
+derivative $\dot x$ is defined below.)
+
+It turns out that the boundedness restriction leaves out many interesting and
+important systems.  On the other, it illustrates the ideal case, and
+highlights some of the properties we hope to discover for the solutions of
+general ODEs (driven by possibly unbounded linear operators) in Banach space.  
+
+
 
 
 \subsection{Preliminaries}\label{ss:prel}
 
 First we recall some facts concerning calculus for Banach space valued
-functions. To this end, let $u$ be a map from $\RR_+$ to $E$, where $E$ is a
-Banach space. If, for some $t > 0$, the limit
+functions. To this end, let $u$ be an element of $\cC$. If, for some $t > 0$,
+the limit
 %
 \begin{equation*}
     \dot u(t)
@@ -284,25 +310,21 @@ definitions after replacing $h \to 0$ with $h \downarrow 0$.
 We say that $u$ is \navy{differentiable} on $\RR_+$ if $u$ is differentiable at
 $t$ for all $t \in \RR_+$.
 
-
-Let $u$ be a continuous map from $[a, b]$ to $E$.  We call $I(u) \in E$ the
-(Riemann) \navy{integral} of $u$ over $[a,b]$ and write $I(u) = \int_a^b u(s) \diff s$ if,
-for every $\epsilon > 0$, there exists  a partition 
-$a = t_0 < t_1 < \cdots t_{k+1} = b$ of $[a, b]$ and points $\{s_i\}$ with
-$t_{i-1} < s_i < t_i$ such that
+Next we define an integral for continuous Banach space valued functions. Fix $u
+\in \cC$.  the (Riemann) \navy{integral} of $u$ over $[a,b]$ is the unique point
+$I \in E$ such that
 %
-\begin{equation*}
-    \left\|
-        \;
-        \sum_{i=0}^{k+1} u(s_i) (t_i - t_{i-1})
-        - I(u)
-        \;
-    \right\| < \epsilon
-\end{equation*}
+\begin{equation}\label{eq:rieint}
+    \int_a^b \inner{u(s), u'} \diff s = \inner{I, u'} 
+    \quad \text{ for all } u' \in E'
+\end{equation}
 %
-
-The next lemma states elementary properties of the integral.
-(For details see, e.g., \cite{applebaum2019semigroups}.)
+In \eqref{eq:rieint}, the left hand side is an ordinary Riemann integral for
+real-valued functions.  
+We write $I = \int_a^b u(s) \diff s$, so that $
+\int_a^b \inner{u(s), u'} \diff s = \inner{\int_a^b u(s) \diff s, u'}$ for all
+$u' \in E$.  A proof of existence and uniqueness, as well as the properties
+listed below, can be found in Section~5.1.2 of \cite{buhler2018functional}.
 
 \begin{lemma}\label{l:riemann}
     If $u$ is continuous on $\RR_+$ and $a, b \in \RR_+$ with $a < b$, then
@@ -319,35 +341,47 @@ The next lemma states elementary properties of the integral.
         \item $L \in \lL(E)$ implies $L \int_a^b u(s) \diff s = \int_a^b Lu(s) \diff s $.
     \end{enumerate}
     %
+    If, in addition, $u$ is continuously differentiable on $[a, b]$ with
+    derivative $\dot u$, then
+    %
+    \begin{equation}\label{eq:ftcb}
+        u(b) = u(a) + \int_a^b \dot u(s) \diff s.
+    \end{equation}
+    %
 \end{lemma}
 
-In what follows, when discussing maps such as $u$ given above,
-we often write $u_t$ and $\dot u_t$ instead of $u(t)$ and $\dot u(t)$.
 
 
 \subsection{Exponentials of Linear Operators}
 
-Let $E$ be a Banach space and let $\lL(E)$ be the bounded linear operators on $E$.
-The scalar exponential of a scalar $a \in \RR$ can be defined by $\exp(a)
+The scalar exponential of $a \in \RR$ can be defined by $\exp(a)
 \coloneq \sum_{n=0}^\infty \frac{a^n}{n!}$.  Analogously, the \navy{exponential}
 of $A \in \lL(E)$ is given by
 %
 \begin{equation}\label{eq:expfun} 
-    \exp(A) \coloneq \sum_{n=0}^\infty \frac{A^n}{n!}.
+    \exp(A) 
+    \coloneq \sum_{n=0}^\infty \frac{A^n}{n!}
+    = I + A + \frac{A^2}{2!} + \cdots
 \end{equation}
 %
+We list some properties of the exponential below.
 
 \begin{lemma}\label{l:expcom}
     Let $A$ and $B$ be elements of $\lL(E)$.  The following properties hold:
     %
     \begin{enumerate}
         \item $\exp(A)$ is a well-defined element of $\lL(E)$  and $\| \exp(A) \| \leq \exp(\|A\|)$.
-        \item If $A$ and $B$ commute (i.e. $AB = BA$), then $\exp(A + B) =
+        \item If $AB = BA$, then $\exp(A + B) =
             \exp(A) \exp(B)$.
-        \item If $m$ is any positive integer, then $\exp(mA) = (\exp(A))^m$.
+        \item $\exp(0) = I$.
     \end{enumerate}
     %
 \end{lemma}
+
+It is immediate from (ii) that if $m$ is any positive integer, then $\exp(mA) =
+(\exp(A))^m$.
+
+The next lemma considers exponential flows in $\lL(E)$.
 
 \begin{lemma}\label{l:expcom2}
     Fix $A \in \lL(E)$ and consider the function $e(t) \coloneq \exp(tA)$ from
@@ -373,8 +407,8 @@ of $A \in \lL(E)$ is given by
 
 
 
-For example, to prove (iv) we fix $A \in \lL(E)$ and consider $e(t) = \exp(t
-A)$. Applying (ii) yields
+For example, to prove (i) of Lemma~\ref{l:expcom2}, we fix $A \in \lL(E)$ and consider $e(t) = \exp(t
+A)$. Applying (ii) of Lemma~\ref{l:expcom} yields
 %
 \begin{equation*}
     \frac{e(t + h) - e(t)}{h}
@@ -383,22 +417,37 @@ A)$. Applying (ii) yields
 \end{equation*}
 %
 Using the definition \eqref{eq:expfun} and taking the limit as $h \downarrow
-0$ gives $\dot e(t) = e(t) A $.  A small variation on the argument above
+0$ gives $\dot e(t) = e(t) A $.  A small variation on the argument 
 shows that $\dot e(t) = A e(t)$ also holds.
 
 
-\subsection{Initial Value Problems}
+\subsection{Initial Value Problems}\label{ss:boundedivp}
 
 Now fix $A \in \lL(E)$ and consider the \navy{initial value problem} (IVP) $\dot
-u = A u$ with $u_0 \in E$ fixed.  A solution to this problem is a continuous
-function $s \mapsto u_s$ from $\RR_+$ to $E$ such that the IVP conditions hold.
+u(t) = A u(t)$ for all $t \geq 0$ with given initial condition $u(0) = u_0 \in
+E$.  A solution to this problem is $u \in \cC$ that is differentiable and 
+obeys the IVP conditions.
 
-\begin{proposition}\label{p:}
-    Given $A \in \lL(E)$, the function $u_t = \exp(tA) u_0$ is the 
-    unique solution to the IVP $\dot u = A u$ with $u_0 \in E$ fixed. 
+\begin{proposition}\label{p:expsol}
+    Given $A \in \lL(E)$, the function $u$ defined by $u(t) = \exp(tA) u_0$ is
+    the unique solution to the IVP stated above.
 \end{proposition}
 
+That $u$ solves the IVP is immediate from the properties in
+Lemmas~\ref{l:expcom}--\ref{l:expcom2}.  
+We prove uniqueness in a more general setting below.
 
+Proposition~\ref{p:expsol} gives a complete description of the solution of ODEs
+in Banach space when the vector field $A$ is a bounded linear operator. As
+well as studying flows of the form $t \mapsto \exp(tA) u_0$ in $E$ we can also
+directly analyze the dynamics of flows $t \mapsto \exp(tA)$ in $\lL(E)$. We
+notice that these flows are continuous (in fact differentiable, by
+Lemma~\ref{l:expcom2}) and obey $\exp((s + t)A) = \exp(tA) \exp(sA)$ for all $s,
+t \geq 0$.  The latter property is called the \emph{semigroup} property of the
+flow.  
+
+In order to generalize these ideas and handle ODEs with unbounded vector fields, 
+we now study a more general notion of continuous semigroups in $\lL(E)$.
 
 
 \section{Introduction to Semigroups}
@@ -407,8 +456,9 @@ Add roadmap.
 
 \subsection{Definitions}
 
-Let $E$ be any set and let $(S_t) \coloneq (S_t)_{t \geq 0}$ be a family of
-self-maps on $E$ with index $t \in \RR_+$. The pair $(E, (S_t))$ is called a \navy{semidynamical system} if 
+Let $(S_t) \coloneq (S_t)_{t \geq 0}$ be a family of
+linear operators in $\lL(E)$ with index $t \in \RR_+$. $(S_t)$ is called 
+an \navy{algebraic operator (AO) semigroup} if 
 $S_0$ is the idendity and $(S_t)$ has the semigroup property
 %
 \begin{equation*}
@@ -416,22 +466,16 @@ $S_0$ is the idendity and $(S_t)$ has the semigroup property
     \quad \text{for all } s, t \in \RR_+.
 \end{equation*}
 %
-Given $u \in E$, the function $t \mapsto S_t u$ is called the \navy{orbit} or
-\navy{trajectory} of $u$ under $(S_t)$.
-
-If $E$ is a vector space and each $S_t$ is linear, then $(E, (S_t))$ is called
-an \navy{algebraic operator (AO) semigroup}.  If, in addition, $E$ is a Banach
-space and $t \mapsto S_t u$ is continuous for all $u \in E$, then $(E, (S_t))$
+If, in addition, $t \mapsto S_t u$ is continuous for all $u \in E$, then $(S_t)$
 is called a \navy{$C_0$-semigroup}.  When $E$ is understood, we say that $(S_t)$
-is a $C_0$-semigroup.
+is a $C_0$-semigroup. Given $u \in E$, the function $t \mapsto S_t u$ is
+called the \navy{orbit} or \navy{trajectory} of $u$ under $(S_t)$.
+The point $u$ is called the \navy{initial condition}.
 
 
 
 \subsection{Continuity Results}
 
-In what follows, $E$ is a real Banach space and $\lL(E)$ is the set of bounded linear
-operators from $E$ to itself.  The symbol $\| \cdot \|$ denotes either the norm
-on $E$ or the operator norm on $\lL(E)$, depending on context.
 
 Let $K$ be a compact subset of $\RR$ and let $\{S_t\}_{t \in K}$ be a subset of
 $\lL(E)$.  The following result is from \cite{engel2006short}.
@@ -514,12 +558,17 @@ $\lL(E)$.  The following result is from \cite{engel2006short}.
 \end{proof}
 
 \begin{lemma}\label{l:semiequivcon}
-    An AO semigroup $(S_t)_{t \geq 0}$ on $E$ is a 
-    $C_0$-semigroup on $E$ if and only if $\lim_{t \downarrow 0} S_t u = u$ for all $u \in E$.
+    If $(S_t)$ is an AO semigroup on $E$, then the following
+    statements are equivalent:
+    %
+    \begin{enumerate}
+        \item $(S_t)$ is a $C_0$-semigroup on $E$.
+        \item $\lim_{t \downarrow 0} S_t u = u$ for all $u \in E$.
+    \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-    Sufficiency is obvious.  Regarding necessity, fix $u \in E$ and $t > 0$.  We
+    That (i) implies (ii) is obvious.  For the reverse implication, fix $u \in E$ and $t > 0$.  We
     need to show that $\|S_{t+h} u - S_t u\| \to 0$ as $h \to 0$.  Suppose first
     that $h \downarrow 0$.  Then
     %
@@ -744,7 +793,7 @@ Add roadmap.
 
 \subsection{Infinitesmial Generators}
 
-Let $E$ be a Banach space and let $(S_t)$ be an AO semigroup.  Set
+Let $E$ be a Banach space and let $(S_t)$ be an AO semigroup on $E$.  Set
 %
 \begin{equation*}
     \dD(A) =
@@ -781,93 +830,94 @@ u$ in $\dD(A)$ obeys a linear differential equation evolving in $\dD(A)$, with $
 as the ``vector field.''
 
 
-\begin{theorem}\label{t:diffpath}
-    If $(S_t)$ is a $C_0$-semigroup, then $\dD(A)$ is dense in $E$.  Moreover,
-    if $u_0 \in E$ and $u_t = S_t u_0$ for all $t \geq 0$, then, for all $t \geq
-    0$,
+\begin{lemma}\label{l:diffpath}
+    If $(S_t)$ is a $C_0$-semigroup and $u \in E$,  then, for all $t \geq 0$,
     %
     \begin{equation}\label{eq:pathfrome}
-        \int_0^t u_s \diff s \in \dD(A) \quad \text{and} \quad
-        u_t = u_0 + A \int_0^t u_s \diff s.
+        \int_0^t S_s \, u \diff s \in \dD(A) \quad \text{and} \quad
+        S_t \, u = u + A \int_0^t S_s \, u \diff s.
     \end{equation}
     %
-\end{theorem}
+\end{lemma}
 
 
 \begin{proof}
-    We begin by proving \eqref{eq:pathfrome}. Fix $u_0 \in E$ and let $u_t$ be
-    as defined above.  For $h > 0$,
+    We begin by proving \eqref{eq:pathfrome}. Fix $u \in E$ and $t \geq 0$.
+    For $h > 0$, using properties of the integral described in
+    Lemma~\ref{l:riemann}, we have
     %
     \begin{align*}
-            S_h \int_0^t u_s \diff s - \int_0^t u_s \diff s
+            S_h \int_0^t S_s \, u \diff s - \int_0^t S_s \, u \diff s
         & = 
-            S_h \int_0^t S_s u_0 \diff s - \int_0^t S_s u_0 \diff s
+            \int_0^t S_{h + s} \, u \diff s - \int_0^t S_s \, u \diff s
         \\
         & = 
-            \int_0^t S_{h + s} u_0 \diff s - \int_0^t S_s u_0 \diff s
-        \\
-        & = 
-            \int_h^{t+h} u_s \diff s - \int_0^t u_s \diff s
+            \int_h^{t+h} S_s \, u \diff s - \int_0^t S_s \, u \diff s
         = 
-            \int_t^{t+h} u_s \diff s - \int_0^h u_s \diff s
+            \int_t^{t+h} S_s \, u \diff s - \int_0^h S_s \, u \diff s
     \end{align*}
     %
-    Applying Lemma~\ref{l:riemann}, we see that multiplying by $(1/h)$ and taking the limit as $h
-    \downarrow 0$ gives $A \int_0^t u_s \diff s = u_t - u_0$. Thus
+    Multiplying by $(1/h)$ and taking the limit as $h
+    \downarrow 0$ gives $A \int_0^t S_s \, u \diff s = S_t u - u$. Thus
     \eqref{eq:pathfrome} is verified.
-
-    To see that $\dD(A)$ is dense, let $v_h = (1/h) \int_0^h u_s \diff s$ for
-    all $h > 0$. By Lemma~\ref{l:riemann},  $v_h \to u_0$ as $h \downarrow 0$.
-    Moreover, by the preceding results in this proof, $v_h$ is in $\dD(A)$ for
-    all $h > 0$.   Hence $\dD(A)$ is dense in $E$.
 \end{proof}
 
 
-\begin{theorem}\label{t:diffpath}
-    If $(S_t)$ is a $C_0$-semigroup, $u_0 \in \dD(A)$ and $u_t = S_t u_0$
-    for all $t \geq 0$, then
+\begin{proposition}\label{p:diffpath2}
+    If $(S_t)$ is a $C_0$-semigroup, then $\dD(A)$ is dense in $E$.  Moreover,  for any
+    $u \in \dD(A)$ and $t \geq 0$,
     %
     \begin{enumerate}
-        \item $u_t \in \dD(A)$  for all $t \geq 0$,
-        \item the derivative $\dot u_t$ exists and equals $A u_t$, and
+        \item $S_t u \in \dD(A)$,
+        \item the map $s \mapsto S_s u$ is differentiable on $\RR_+$ and
+            %
+            \begin{equation}\label{eq:eqdiff}
+                \frac{\diff}{\diff t} S_t u
+                = A S_t u = S_t A u,
+                \quad \text{and}
+            \end{equation}
+            %
+        \item $S_t u = u + \int_0^t S_s A u \diff s$ for all $u \in \dD(A)$ and $t \geq 0$.
     \end{enumerate}
     %
-    In particular, the trajectory $t \mapsto u_t$ is a solution to the initial
-    value problem $\dot u_t = A u_t$ with initial condition $u_0 \in \dD(A)$.  Moreover,
-    this trajectory obeys
-    %
-    \begin{equation}
-        u_t = u_0 + \int_0^t S_s A u_0 \diff s
-        \quad \text{for all } t \geq 0.
-    \end{equation}
-    %
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
-    Fix $u_0 \in \dD(A)$ and let $u_t = S_t u_0$. Claim (i) follows from (ii)
-    because, when $t$ is fixed and $s \mapsto u_s$ is differentiable, the limit
+    To see that $\dD(A)$ is dense, consider $v_h \coloneq (1/h) \int_0^h S_s \,
+    u \diff s$ with $h \geq 0$. By Lemma~\ref{l:riemann},  $v_h \to u$ as $h \downarrow 0$.
+    Moreover, \eqref{eq:pathfrome} implies that $v_h$ is in $\dD(A)$ for
+    all $h > 0$.   Hence $\dD(A)$ is dense in $E$.
+
+
+    Regarding (i), fix $t \geq 0$ and $u \in \dD(A)$.  We have
     %
     \begin{equation*}
-        \lim_{h \downarrow 0}
-         \frac{S_h u_t - u_t}{h}
-         =
-        \lim_{h \downarrow 0}
-         \frac{u_{t+h} - u_t}{h} 
+        A S_t u
+        = \lim_{h \downarrow 0} \frac{S_h S_t u - S_t u}{h}
+        = \lim_{h \downarrow 0} \frac{S_t S_h u - S_t u}{h}
+        = \lim_{h \downarrow 0} S_t \frac{S_h u - u}{h}
+        =  S_t A u,
     \end{equation*}
     %
-    exists (and hence $u_t \in \dD(A)$).
-    Regarding (ii), fix $t > 0$  (the case $t=0$ is trivial) and $h > 0$.  Using
-    continuity of $S_t$ and taking $h \downarrow 0$, we have
+    where the last equality is by continuity of $S_t$ (i.e., $S_t \in \lL(E)$).
+    This proves both (i) and the second equality in \eqref{eq:eqdiff}.
+
+    We now show that $s \mapsto S_s u$ is differentiable at $t \in \RR_+$ with
+    derivative $S_t A u$, which will complete the proof of (ii). We choose $t >
+    0$  because the case $t=0$ is trivial. The right derivative of $S_t u$ is 
     %
     \begin{equation*}
-         \frac{u_{t+h} - u_t}{h} = S_t \frac{u_h - u_0}{h} \to S_t A u_0.
+        \lim_{h \downarrow 0} \frac{S_{t + h} u - S_t u}{h}
+        = \lim_{h \downarrow 0} \frac{S_t S_h u - S_t u}{h}
     \end{equation*}
     %
+    which has already been shown to equal $S_t A u$.
+
     Regarding the left-hand derivative, we take $0 < h < t$ and use
     %
     \begin{equation*}
-        \frac{u_{t-h} - u_t}{-h} - S_t A u_0
-        = S_{t-h} \left( \frac{u_0 - u_h}{-h} - S_h A u_0 \right)
+        \frac{S_{t-h} u - S_t u}{-h} - S_t A u
+        = S_{t-h} \left( \frac{u - S_h u}{-h} - S_h A u \right)
     \end{equation*}
     %
     and the boundedness of $\| S_t \|$ over bounded sets (Lemma~\ref{l:ubfc}) to
@@ -875,40 +925,141 @@ as the ``vector field.''
     %
     \begin{equation*}
         \left\|
-            \frac{u_{t-h} - u_t}{-h} - S_t A u_0
+            \frac{S_{t-h} u - S_t u}{-h} - S_t A u
         \right\|
         \leq M
         \left\|
-            \frac{u_0 - u_h}{-h} - A u_0
+            \frac{u - S_h u}{-h} - A u
         \right\|
         +
         M
         \left\|
-            A u_0 - S_h A u_0
+            A u - S_h A u
         \right\|.
     \end{equation*}
     %
     Both terms on the right converge to zero in $h$, so we have proved that
-    the derivative $\dot u_t$ of $u_t$ exists and is equal to $S_t A u_0$.
+    the left derivative is also to $S_t A u$.  This completes the proof of (ii).
 
-    Since $u_t = S_t u_0$, our proof will be complete if we can show that 
+    Regarding (iii), let $\phi(s) = S_s u$ for all $s \geq 0$.  We have shown in
+    (ii) that $\phi$ is differentiable on $\RR_+$ with $\dot \phi(s) = S_s A u$.  
+    With this notation, the claim in (iii) can be expressed as
+    $\phi(t) = \phi(0) + \int \dot \phi(s)
+    \diff s$. Since $s \mapsto S_s A u$ is continuous in $s$, $\phi$ is also continuously
+    differentiable.  The claim in (iii) now follows from \eqref{eq:ftcb}.
+\end{proof}
+
+The next result shows that semigroups are uniquely identified by their
+generators.
+
+\begin{proposition}\label{p:sgufg}
+    Let $(S_t)$ and $(T_t)$ be two $C_0$-semigroups on $E$ with infinitesimal
+    generators $(A, \dD(A))$ and $(B, \dD(B))$.  If $(A, \dD(A)) = (B, \dD(B))$,
+    then $(S_t) = (T_t)$.
+\end{proposition}
+
+\begin{proof}
+    Let the statement hold, so that $(S_t)$ and $(T_t)$ are $C_0$-semigroups
+    $(A, \dD(A))$. Fix $t > 0$.  We claim that $S_t = T_t$ on $E$. Since
+    $\dD(A)$ is dense in $E$, it suffices to show that $S_t$ and $T_t$ agree on
+    $\dD(A)$.
+
+    To this end, fix $u \in \dD(A)$ and let $s \mapsto v(s)$ be a differentiable
+    function on $\RR_+$ with $\dot v = A v$ and $v(0) = u$.  Define $w(s)
+    \coloneq S_{t-s} v(s)$ for all $s \in (0, t)$.
+    For $h$ close to zero we have 
     %
-    \begin{equation}\label{eq:stuat}
-        A S_t u_0 = S_t A u_0 
-        \qquad (t \geq 0, \; u_0 \in \dD(A))
+    \begin{align*}
+        w(s + h) - w(s)
+        & = S_{t-s-h} v(s + h) - S_{t-s} v(s)
+        \\
+        & = S_{t-s-h} (v(s + h) - v(s)) + S_{t-s-h} v(s) - S_{t-s} v(s)
+    \end{align*}
+    %
+    Dividing by $h$ gives
+    %
+    \begin{equation}\label{eq:wsh}
+        \frac{w(s + h) - w(s)}{h}
+        = S_{t-s-h} \frac{v(s + h) - v(s)}{h} 
+            - S_{t-s} \frac{S_{-h} v(s) - v(s)}{-h}
     \end{equation}
     %
-    But this follows easily from 
+    Consider the first term in \eqref{eq:wsh}.  Letting
     %
     \begin{equation*}
-        A S_t u_0
-        = \lim_{h \downarrow 0} \frac{S_h S_t u_0 - S_t u_0}{h}
-        = \lim_{h \downarrow 0} \frac{S_t S_h u_0 - S_t u_0}{h}
-        = \lim_{h \downarrow 0} S_t \frac{S_h u_0 - u_0}{h}
+        d(h) \coloneq
+        \left\|
+           S_{t-s-h} \frac{v(s + h) - v(s)}{h} 
+           - S_{t-s} A v(s)
+        \right\|
     \end{equation*}
     %
-    and continuity of $t \mapsto S_t$.
+    and, choosing $M$ suitably large, we have
+    %
+    \begin{align*}
+        d(h) 
+        & \leq 
+        \|S_{t-s-h}\|
+        \left\|
+            \frac{v(s + h) - v(s)}{h} 
+           - S_h A v(s)
+        \right\|
+        \\
+        & \leq M
+        \left\|
+            \frac{v(s + h) - v(s)}{h} 
+           - A v(s)
+        \right\|
+        + M \| Av(s) - S_h A v(s) \|
+    \end{align*}
+    %
+    This confirms that $d(h) \to 0$ as $h \to 0$, which means that the first
+    term in \eqref{eq:wsh} converges to $S_{t-s} A v(s)$.
+
+    The second term also converges to
+    $S_{t-s} A v(s)$. Hence $w$ is differentiable on $(0, t)$ with $\dot w = 0$.
+    It follows from \eqref{eq:ftcb} that $w(s) = w(0) = S_t u$ for all $s < t$.
+    Hence $S_{t-s} v(s) = S_t u$ for all $s < t$.  Taking $s \to t$ and applying
+    continuity gives $v(t) = S_t u$.  
+
+    To complete the proof we consider the case $v(s) = T_s u$.  According to
+    Proposition~\ref{p:diffpath2}, the function $v$ is differentiable on $\RR_+$
+    with $\dot v = A v$ and $v(0) = v$. Hence $T_t u = S_t u$.
+    This confirms that $S_t$ and $T_t$ agree on $\dD(A)$.
 \end{proof}
+
+\subsection{Implications for IVPs}
+
+Let's now translate the results above in to findings for IVPs with potentially
+unbounded generators.  We confirm that many of the results from the bounded
+case (see \S\ref{ss:boundedivp}) either carry over or have direct analogs with
+the general case.
+
+In the next theorem, $C_1(\RR_+, E)$ is the set of continuously differentiable
+functions from $\RR_+$ to $E$.
+
+\begin{theorem}\label{t:ivps}
+    Let $(S_t)$ be a $C_0$-semigroup with infinitesimal generator $(A, \dD(A)$
+    and let $u_0$ be a point in $\dD(A)$.  The unique solution in $C(\RR_+, E)$
+    of the initial value problem $\dot u = A u$ with $u(0) = u_0$ is the
+    function defined by $u(t) \coloneq S_t u_0$. Moreover, $u(t)$ is continuously
+    differentiable on $\RR_+$ and 
+    %
+    \begin{equation*}
+       \dot u(t) = A S_t u = S_t A u_0.
+    \end{equation*}
+    %
+\end{theorem}
+
+\begin{proof}
+    Most of the claims in Theorem~\ref{t:ivps} follow directly from
+    Proposition~\ref{p:diffpath2}.  The only missing components is uniqueness.
+    To prove it, fix $u_0 \in \dD(A)$ and let $v$ be a differentiable function from
+    $\RR_+$ to $E$ with $\dot v(t) = A v (t)$ for all $t$ and $v(0) = u_0$.
+    We already showed in the proof of Proposition~\ref{p:sgufg} that for any
+    such function we have $v(t) = S_t u_0 = u(t)$.  Hence uniqueness also holds.
+\end{proof}
+
 
 
 \bibliographystyle{apalike}
