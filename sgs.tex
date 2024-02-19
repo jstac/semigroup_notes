@@ -684,7 +684,7 @@ Borel measurable real-valued functions on $\RR$ with $\| f \| \coloneq \int
 defined by 
 %
 \begin{equation*}
-    (S_t f)(x) = f(x + t)
+    (S_t f)(x) = f(x - t)
     \qquad (x \in \RR, \; t \geq 0).
 \end{equation*}
 %
@@ -722,7 +722,7 @@ Let $(\Xsf, \bB, \mu)$ be a $\sigma$-finite measure space and let
 $\phi$ be a measurable map from $\Xsf$ to $\RR_+$.  Define
 %
 \begin{equation*}
-    S_t f = \exp(-t \phi(x)) f(x) 
+    S_t f (x)= \exp(-t \phi(x)) f(x) 
     \qquad (x \in \Xsf, \; t \geq 0).
 \end{equation*}
 %
@@ -1028,7 +1028,7 @@ generators.
     This confirms that $S_t$ and $T_t$ agree on $\dD(A)$.
 \end{proof}
 
-\subsection{Implications for IVPs}
+
 
 Let's now translate the results above in to findings for IVPs with potentially
 unbounded generators.  We confirm that many of the results from the bounded
@@ -1062,6 +1062,56 @@ functions from $\RR_+$ to $E$.
 
 
 
+\subsection{Resolvents} 
+Let $A$ be the infinitesmial generator of a $C_0$-semigroup $(S_t)$. Since $A$ is closed linear operator, we define the \navy{Resolvent} of $(S_t)$ by
+$$R_{\lambda}(A)=(\lambda I-A)^{-1}$$
+where $R_{\lambda}(A): E\rightarrow\dD(A)$ and $\lambda\in\rho(A)$. Thus, $R_{\lambda}(A) \in\mathcal{L}(E)$.
+
+\begin{proposition} 
+	Let $A$ be the infinitesmial generator of a $C_0$-semigroup $(S_t)$ satisfying $\| S_t\|\leq M e^{at}$ for all $t\geq 0$. The following hold:
+	\begin{enumerate}
+		\item $\{\lambda\in \mathbb{C}:\Re(\lambda)>a\}\subset \rho(A)$
+		\item for all $\Re(\lambda)>a$
+		$$R_{\lambda}(A)=\int_{0}^{\infty} e^{-\lambda t}S_t \diff t$$
+		
+		\item for all $\Re(\lambda)>a$
+		$$\|R_{\lambda}(A)\|\leq\frac{M}{\Re(\lambda)-a}$$
+	\end{enumerate}
+\end{proposition}
+\begin{proof}
+	 Let $T_{\lambda}=\int_{0}^{\infty} e^{-\lambda t}S_t \diff t$ and we need to show $T_{\lambda}=(\lambda I-A)^{-1}$ for  all $\Re(\lambda)>a$. That is, for all $u\in E$
+	 \begin{equation*}
+	 	T_{\lambda}(\lambda I-A)u=u
+	 	\quad \text{and} \quad
+	 	(\lambda I-A)T_{\lambda}u=u
+	 \end{equation*}
+ which is equivalent to 
+    \begin{equation}\label{eq:rvt}
+   	T_{\lambda}Au=AT_{\lambda}u=\lambda T_{\lambda}u-u
+     \end{equation}
+ We first show $T_{\lambda}$ is bounded.
+     \begin{align*}
+ 	\|T_{\lambda}u\|
+ 	&=\|\int_{0}^{\infty} e^{-\lambda t}S_tu \diff t\|\leq \int_{0}^{\infty} \|e^{-\lambda t} \|\cdot\|S_tu\| \diff t\\
+ 	&\leq  	\|u\|M\int_{0}^{\infty} \e^{(a-\Re(\lambda)) t} \diff   t=\frac{M}{\Re(\lambda)-a} \|u\| 
+    \end{align*}
+Since $T_{\lambda}$ and $(S_t)$ are bounded,
+    \begin{align*}
+    	T_{\lambda} Au
+    	&=\int_{0}^{\infty} e^{-\lambda t}S_t \lim_{h \downarrow 0}\frac{S_h-I}{h}u\diff t\\
+    	&=\lim_{h \downarrow 0}\int_{0}^{\infty} e^{-\lambda t}S_t \frac{S_h-I}{h}u\diff t\\
+    	&=\lim_{h \downarrow 0}\frac{S_h-I}{h}\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t=AT_{\lambda}u
+    \end{align*}
+Then we have $T_{\lambda} Au=AT_{\lambda}u$. We next show the second equality of \eqref{eq:rvt}.
+   \begin{align*}
+   AT_{\lambda}u&
+   =\lim_{h \downarrow 0}\frac{S_h-I}{h}\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t=\lim_{h \downarrow 0}(\frac{1}{h}\int_{0}^{\infty} e^{-\lambda t}S_{t+h} u\diff t)-\frac{1}{h}\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t)\\
+   &=\lim_{h \downarrow 0}(\frac{1}{h}\int_{h}^{\infty} e^{-\lambda( t-h)}S_{t} u\diff t)-\frac{1}{h}\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t)\\
+   &=\lim_{h \downarrow 0}- e^{\lambda h}\frac{1}{h}\int_{0}^{h} e^{-\lambda t}S_t u\diff t+\lim_{h \downarrow 0}\frac{1}{h}(e^{\lambda h}-1)\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t=-u+\lambda T_{\lambda}u
+\end{align*}
+Thus, statement (ii) holds and statement (i) and (iii) follow from the proof of (ii).
+\end{proof}
+\newpage
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
 
