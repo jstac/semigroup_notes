@@ -1116,12 +1116,13 @@ Thus, statement (ii) holds and statement (i) and (iii) follow from the proof of 
 \begin{equation*}
 Af:=f''
 \end{equation*}  
-with the domain $D(A)\coloneq\{f\in C^2[0,1]:f'(0)=f'(1)=0\},$ where $D(A)$ is dense in $E.$ Now we define $(e_n)$ as
+with the domain $D(A)\coloneq\{f\in C^2[0,1]:f'(0)=f'(1)=0\}.$ Now we define $(e_n)$ as
 \begin{equation*}
 s\mapsto e_n(s) :=\begin{cases}1 & \text{if $n =0$} \\
                                                    \sqrt{2} \cos(\pi n s) & \text{if $n\geq 1$}
                              \end{cases}
 \end{equation*}
+It is obvious that $(e_n)\subset D(A).$
 \begin{lemma}
  $Y\coloneq \emph{lin}\{e_n:n\geq0\}$ is a dense algebra of $E.$
 \end{lemma}
@@ -1140,6 +1141,11 @@ s\mapsto e_n(s) :=\begin{cases}1 & \text{if $n =0$} \\
 	\end{equation*}
 	Thus, by induction, $\cos(\pi s)^n\in Y$ for all $n$ and so $ Y'\subset Y$ which finishes the proof.
 \end{proof}
+As we know that $D(A)$ is a linear space containing $(e_n)$, $Y\subset D(A)$ and so $D(A)$ is a dense subspace of $E.$ Define the \navy{rank-one operators} as
+\begin{equation*}
+e_n\otimes e_n\colon f\mapsto \big \langle f,e_n \big \rangle\ e_n\coloneq \Big (\int_{0}^{1}f(s)e_n(s)\diff s\Big)\ e_n
+\end{equation*}
+
 \newpage
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
