@@ -1136,16 +1136,49 @@ It is obvious that $(e_n)\subset D(A).$
 	\end{equation*} is a dense subalgebra of $E.$ 
 	
 	By trigonometric identities, we have
-	\begin{equation*}
+	\begin{equation}\label{eq:trigo}
 	\cos(\alpha+\beta)+\cos(\alpha-\beta)=2\cos(\alpha)\cos(\beta)
-	\end{equation*}
+	\end{equation}
 	Thus, by induction, $\cos(\pi s)^n\in Y$ for all $n$ and so $ Y'\subset Y$ which finishes the proof.
 \end{proof}
 As we know that $D(A)$ is a linear space containing $(e_n)$, $Y\subset D(A)$ and so $D(A)$ is a dense subspace of $E.$ Define the \navy{rank-one operators} as
 \begin{equation*}
 e_n\otimes e_n\colon f\mapsto \big \langle f,e_n \big \rangle\ e_n\coloneq \Big (\int_{0}^{1}f(s)e_n(s)\diff s\Big)\ e_n
 \end{equation*}
+where $\|e_n\otimes e_n\| \leq 2$ and  $(e_n\otimes e_n)\ e_m=\mathbf{1}_{\{m=n\}}\ e_n$ for all $m,n$. The operators $(S_t)$ is defined as 
+\begin{equation}\label{eq:diff-semi}
+	S_t=\sum_{n=0}^{\infty} e^{-\pi^2n^2 t} \cdot e_n\otimes e_n
+\end{equation}
+Then we have for $f\in E$,
+\begin{align*}
+	S_tf&=\sum_{n=0}^{\infty} e^{-\pi^2n^2 t} \cdot \langle f,e_n \big \rangle\ e_n\\
+	       &=\sum_{n=0}^{\infty} e^{-\pi^2n^2 t} \cdot \Big (\int_{0}^{1}f(s)e_n(s)\diff s\Big)\ e_n
+\end{align*}
+For $r\in [0,1]$, 
+\begin{align*}
+	(S_tf)(r)&=\sum_{n=0}^{\infty} e^{-\pi^2n^2 t} \cdot \Big (\int_{0}^{1}f(s)e_n(s)\diff s\Big)\ e_n(r)\\
+	               &=\sum_{n=0}^{\infty} e^{-\pi^2n^2 t} \cdot \Big (\int_{0}^{1}f(s)e_n(s)e_n(r)\diff s\Big)\ \\
+	               &=\int_{0}^{1}f(s)\sum_{n=0}^{\infty} e^{-\pi^2n^2 t} \cdot e_n(s)e_n(r)\diff s \\
+	               &=\int_{0}^{1}f(s)\Big(2\sum_{n=1}^{\infty} e^{-\pi^2n^2 t} \cdot \cos(n\pi s)\cos(n\pi r)+1\Big)\diff s 	               
+\end{align*}
+We denote $k_t(s,r)=2\sum_{n=1}^{\infty} e^{-\pi^2n^2 t} \cdot \cos(n\pi s)\cos(n\pi r)+1$, and $(S_tf)(r)=\int_{0}^{1}f(s) k_t(s,r)\diff s $. For all $S_t$,
+\begin{equation*}
+	\|S_t\|=\sup_{f\in E}\frac{\|S_t f\|}{\|f\|}=\sup_{f\in E}\frac{\sup_{r\in [0,1]}\|\int_{0}^{1}f(s) k_t(s,r)\diff s \|}{\|f\|}\leq \sup_{r\in [0,1]}\|\int_{0}^{1}k_t(s,r)\diff s \|=1
+\end{equation*}
+and since $\|S_t\1\|=1$, $\|S_t\|=1.$
 
+The Jacobi identity is 
+\begin{equation*}
+	w_t(s)=\frac{1}{\sqrt{4\pi t}}\sum_{\mathbb{Z}}e^{-(s+2n)^2/4t}=\frac{1}{2}+\sum_{n=1}^{\infty} e^{-\pi^2n^2 t} \cdot \cos(n\pi s)
+\end{equation*}
+Applying \eqref{eq:trigo}, $k_t(s,r)=w_t(s+r)+w_t(s-r)$. 
+\begin{proposition}
+	$(S_t)$ is a $C_0$ semigroup on E and its generator is given by
+	\begin{equation*}
+		Af=f''
+	\end{equation*}
+   with the domain $D(A)\coloneq\{f\in C^2[0,1]:f'(0)=f'(1)=0\}.$
+\end{proposition}
 \newpage
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
