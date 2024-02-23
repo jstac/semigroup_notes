@@ -1111,6 +1111,35 @@ Then we have $T_{\lambda} Au=AT_{\lambda}u$. We next show the second equality of
 \end{align*}
 Thus, statement (ii) holds and statement (i) and (iii) follow from the proof of (ii).
 \end{proof}
+\subsection{Examples}
+\subsubsection{Diffusion Semigroups(One-Dimenstional).} Consider the Banach Space $E=C[0,1]$ and the differential operator 
+\begin{equation*}
+Af:=f''
+\end{equation*}  
+with the domain $D(A)\coloneq\{f\in C^2[0,1]:f'(0)=f'(1)=0\},$ where $D(A)$ is dense in $E.$ Now we define $(e_n)$ as
+\begin{equation*}
+s\mapsto e_n(s) :=\begin{cases}1 & \text{if $n =0$} \\
+                                                   \sqrt{2} \cos(\pi n s) & \text{if $n\geq 1$}
+                             \end{cases}
+\end{equation*}
+\begin{lemma}
+ $Y\coloneq \emph{lin}\{e_n:n\geq0\}$ is a dense algebra of $E.$
+\end{lemma}
+\begin{proof}
+	By Stone–Weierstrass theorem,  The set of all polynomial functions forms a  dense subalgebra of $E$. That is,
+	\begin{equation}\label{eq:poly}
+	\text{lin}\{f_n: f_n(s)=s^n, s\in[0,1], n\geq0\}
+	\end{equation} is a dense subalgebra of $E.$ We now let $x=\cos(\pi s)$ with $s\in[0,1]$ and so $x\in[0,1]$. In this way, we replace $s$ in \eqref{eq:poly} by $\cos(\pi s)$ and then
+	\begin{equation*}
+	Y'\coloneq\text{lin}\{f_n: f_n(s)=\cos(\pi s)^n, s\in[0,1], n\geq0\}
+	\end{equation*} is a dense subalgebra of $E.$ 
+	
+	By trigonometric identities, we have
+	\begin{equation*}
+	\cos(\alpha+\beta)+\cos(\alpha-\beta)=2\cos(\alpha)\cos(\beta)
+	\end{equation*}
+	Thus, by induction, $\cos(\pi s)^n\in Y$ for all $n$ and so $ Y'\subset Y$ which finishes the proof.
+\end{proof}
 \newpage
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
