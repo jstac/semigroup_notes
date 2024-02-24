@@ -1173,12 +1173,17 @@ The Jacobi identity is
 \end{equation*}
 Applying \eqref{eq:trigo}, $k_t(s,r)=w_t(s+r)+w_t(s-r)$. 
 \begin{proposition}
-	$(S_t)$ is a $C_0$ semigroup on E and its generator is given by
+	$(S_t)$ with $S_0=I$ is a $C_0$ semigroup on E and its generator is given by
 	\begin{equation*}
 		Af=f''
 	\end{equation*}
    with the domain $D(A)\coloneq\{f\in C^2[0,1]:f'(0)=f'(1)=0\}.$
 \end{proposition}
+\begin{proof}
+	Note that the property of rank-one operators $(e_n\otimes e_n)\ e_m=\mathbf{1}_{\{m=n\}}\ e_n$ for all $m,n$. It is obvious that $S_{t+s}=S_tS_t$ holds on $Y$ and so on $E$ by continuity. Similarly, $t\mapsto S_t u$ is continuous for all $u\in E.$ 
+	
+	We next show the generator of $B$ of $(S_t)$ coincides with $A$ defined above. By simple calculations, $Bf=Af$ for all $f\in Y.$ By definition of $A$ and Wiki\footnote{\url{https://en.wikipedia.org/wiki/Spectral_theory_of_ordinary_differential_equations}}, $1\in \rho(A)$. Theorem 1.10(ii) of \cite{engel2006short} implies $1\in \rho(B)$ as well. Thus, $(A-I)^{-1}$ coincides with $(B-I)^{-1}$ on $B(Y)$ which is dense in $E.$ Boundeness of $(A-I)^{-1}$ and $(B-I)^{-1}$ implies $(A-I)^{-1}$ and $(B-I)^{-1}$ agree on $E$ and so $A=B.$
+\end{proof}
 \newpage
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
