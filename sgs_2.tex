@@ -300,9 +300,42 @@ which is naturally true by definition of $\kappa$.
 \end{proof}
 \subsection{Some examples}
 \subsubsection{Transition operators}
+Let $\pP$ be a transition kernel on a measurable space $(X,\Sigma)$ and $B(X)$ be the Banach space of bounded measurable, real-valued functions on $X$ with supernorm
+\begin{equation*}
+	\|g\|=\sup_{x\in X}|g(x)|
+\end{equation*}
+\color{orange}(!! super norm is not the norm of $L^{\infty}$ )\color{black}
+
+Given $g\in B(X)$, 
+\begin{equation*}
+	T g(x)=\int_{X}g(y) \diff\PP_x
+\end{equation*}
+where $\PP_x(B)=\pP(x,B)$ for all $B\in\Sigma.$ Then $T$ is a linear operator on $B(X).$ We define another linear operator $F$ on the set of all finite signed measures $\mathcal{U}(X)$ by 
+\begin{equation*}
+	F\mu(B)=\int_{X}\pP(x,B) \diff\mu
+\end{equation*}
+where $\mu\in\mathcal{U}^+(X)$ and it extends to all $ \mathcal{U}$ by linearity.
+
+Now combining transition probability $\pP$ and linear operators $T,F$ together, we have for two $X$-valued r.v. $\psi_0$ and $\psi_1$ with distribution  $\mu_0$ and $\mu_1$. If $$\PP(\psi_1\in B|\psi_0=x)=\pP(x,B)$$ then we have
+\begin{equation*}
+	\mu_1=F\mu_0~~~\text{and}~~~\EE(g(\psi_1)|\psi_0=x))=\int_{X}g(y)\diff \PP_x=Tg(x)
+\end{equation*}
+for all $x\in X$ and $g\in B(X).$
+
+\noindent\color{violet} Two linear operators \textbf{constructed from $\pP$} characterize the change of distributions of r.v. and property of conditional expectation on initial value.\color{black}
+\bigskip
+
 \subsubsection{Substochastic and stochastic operators}
+Consider $L^1(X,\Sigma,\mu)$ and $L^{\infty}(X,\Sigma,\mu)$ with $\mu$ a $\sigma$-finite measure.  A linear operator $T\colon L^1(X,\Sigma,\mu)\rightarrow L^1(X,\Sigma,\mu)$ is \emph{substochastic} if $f\geq 0$ then $Tf\geq0$ for all $f\in L^1$ and if $\|Tf\|\leq \|f\|$ for all $f\in L^1$. The \emph{adjoint} operator $T^*\colon L^{\infty}(X,\Sigma,\mu)\rightarrow L^{\infty}(X,\Sigma,\mu)$ satisfies
+\begin{equation*}
+	\int_{X}Tf(x)g(x)\diff \mu=\int_{X}f(x)T^*g(x)\diff \mu
+\end{equation*}
+for all $f\in L^1$ and $g\in L^{\infty}.$ We now  connect $T$ and $T^*$ to transition kernel $\pP.$
+
+\noindent\color{blue} Why are these two operators defined on different spaces? $L^{\infty}\subset L^1.$ Check which steps to make it well-defined \color{black}
+
 \subsubsection{Integral Stochastic Operators}
-\subsubsection{Frobenius–Perron Operator}
+%\subsubsection{Frobenius–Perron Operator}
 \newpage
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
