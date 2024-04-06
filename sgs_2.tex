@@ -280,13 +280,23 @@ If $\pP(x,X)=1$ for all $x\in X$, $\PP$ is a \emph{transition probability.}
  	Let $\pP$ be a transition probability from a \emph{mesurable space} $(X_0,\Sigma_0)$ to a \emph{Boral space} $(X_1,\Sigma_1).$ There exists a measurable function $\kappa\colon X_0\times [0,1] \rightarrow X_1$ such that $\kappa(x,v)$ has the same distribution $\pP(x,\cdot)$ for every $x\in X_0$ if $v$ is uniformly distributed on $[0,1].$
  \end{proposition}
 \begin{proof}
-Intuition seems straightfoward but the proof....takes time to understand....
-
-Since $(X_1,\Sigma_1)$ is a Boral space, there exist measureble bijection $\phi\colon X_1\rightarrow[0,1] .$ We need to define $\kappa$ $\st$ for all $x\in X_0,$
+Since $(X_1,\Sigma_1)$ is a Boral space, there exist measureble bijection $\phi\colon X_1\rightarrow[0,1] .$ We need to define $\kappa$ $\st$ 
+\begin{equation}\label{eq:kappa}
+   \Prob(\kappa(x,v)\in B)=\pP(x,B)~~~\text{for all}~~x\in X_0,~ B\in \Sigma_1
+\end{equation}
+First let $F_x(t)=\pP(x,\phi^{-1}([0,t]))$ with $t\in [0,1]$ and so $t\mapsto F_x(t)$ is right continuous (same reason as CDF is r.c.) with $ F_x(1)=1.$ The generalized inverse of $F$ is
 \begin{equation*}
-\Prob(\kappa(x,v)\in B)=\pP(x,B)
+   F^{\leftarrow}_x(q) =\inf\setntn{t\geq 0}{F_x(t)\geq q}, ~~q\geq0
 \end{equation*}
-
+Now we define 
+\begin{equation*}
+ \kappa(x,q)=\phi^{-1}(F^{\leftarrow}_x(q) )
+\end{equation*}
+Note that the probability distribution of a uniform random variable is the Lebesgue measure, the \eqref{eq:kappa} reduces to
+\begin{equation}\label{eq:kappa2}
+   Leb(q\in[0,1]: \kappa(x,q)\in \phi^{-1}([0,t]) )=\pP(x,\phi^{-1}([0,t]) )~~~\text{for all}~~x\in X_0,~ t\in [0,1]
+\end{equation}
+which is naturally true by definition of $\kappa$.
 \end{proof}
 %\subsection{Transition operators}
 \newpage
