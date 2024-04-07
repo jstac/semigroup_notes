@@ -334,8 +334,40 @@ for all $f\in L^1$ and $g\in L^{\infty}.$ We now  connect $T$ and $T^*$ to trans
 
 \noindent\color{blue} Why are these two operators defined on different spaces? $L^{\infty}\subset L^1.$ Check which steps to make it well-defined \color{black}
 
-\subsubsection{Integral Stochastic Operators}
+\subsubsection{Integral stochastic operators}
 %\subsubsection{Frobenius–Perron Operator}
+\subsection{Discrete Marcov Processes}
+\subsubsection{Marcov processes}
+A family $(\xi_n)$ of $X$-valued r.v. has \emph{Markov property} if for all $n\geq0$
+\begin{equation*}
+    \PP(\xi_{n+1}\in B|\xi_0,\cdots,\xi_n)=\PP(\xi_{n=1}\in B|\xi_n)
+\end{equation*}
+\begin{proposition}
+	A sequence $(\xi_n)$ has Marcov property if and only if for each $n$ and all $A\in \sigma(\xi_m: m\geq n)$ and  $F\in \sigma(\xi_m: m\leq n)$
+	$$\PP(A\cup F|\xi_n)=\PP(A|\xi_n)\PP(F|\xi_n)$$
+\end{proposition}
+\begin{proof}
+	A sequence of r.v. $(\xi_n)$ has Marcov propert. Then we have
+	\begin{align*} 
+	\PP(A\cup F|\xi_n)&=\PP(A\cup F|\xi_0,\cdots,\xi_n)~~~~~(\textcolor{orange}{Marcov~ property})\\
+	                             &=\EE(\1_A\1_F|\xi_0,\cdots,\xi_n) \\
+	                             &=\1_F\EE(\1_A|\xi_0,\cdots,\xi_n) ~~~~~(\textcolor{orange}{F\in  \sigma(\xi_m: m\leq n) })\\
+	                             &=\EE(\1_F|\xi_0,\cdots,\xi_n)\EE(\1_A|\xi_0,\cdots,\xi_n)\\
+	                             &=\PP(A|\xi_0,\cdots,\xi_n)\PP( F|\xi_0,\cdots,\xi_n)\\
+	                             &=\PP(A|\xi_n)\PP( F|\xi_n)~~~~~(\textcolor{orange}{Marcov~ property})
+	\end{align*}
+	For the other direction, we let the equality holds. Let $A\in\sigma(\xi_n)$ and $F\in \sigma(\xi_m: m\leq n)$. The equality implies $\sigma(\xi_n)$ and $\sigma(\xi_m: m\leq n)$ are independent. Thus for $A\in \sigma(\xi_{n+1}),$
+	\begin{equation*}
+	\EE(\1_A|\xi_0,\cdots,\xi_n)=\EE(\EE(\1_A|\xi_n))|\xi_0,\cdots,\xi_n)=\EE(\1_A|\xi_n))
+	\end{equation*}
+\end{proof}
+A stochastic process $(\xi_n)$ is a Marcov process with transition probability $\pP$ and initial distribution $\mu$ on $(X,\Sigma)$ if there is $(\Omega,\fF,\PP)$ $\st$ $\mu(B)=\PP(\xi_0\in B)$ and for all $B\in \Sigma,$
+\begin{equation*}
+      \PP(\xi_{n+1}\in B|\xi_0,\cdots,\xi_n)=\pP(\xi_n,B)
+\end{equation*}
+\textcolor{orange}{In this definition, transition probability $\pP$ gives the Marcov property and the initial distribution fixes the starting r.v.  }
+
+\subsubsection{Canonical processes}
 \newpage
 \bibliographystyle{apalike}
 \bibliography{sgs_bib}
