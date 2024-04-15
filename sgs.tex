@@ -2,6 +2,7 @@
 
 \usepackage{amsmath, amssymb, amsthm, amsfonts}
 
+
 % avoid `Too many math alphabets used in version normal` error
 \newcommand\hmmax{0}
 \newcommand\bmmax{0}
@@ -253,6 +254,7 @@
 \maketitle
 
 
+
 In what follows, 
 %
 \begin{itemize}
@@ -264,16 +266,18 @@ In what follows,
         $\lL(E)$, depending on context. 
 \end{itemize}
 
-Also, given $\Xsf \subset \RR$ and normed linear space $F$,
+Also, given $R \subset \RR$ and normed linear space $F$,
 %
 \begin{itemize}
-    \item $C_0(\Xsf, F)$ is the set of continuous functions from $\Xsf$ to $F$
+    \item $C_0(R, F)$ is the set of continuous functions from $R$ to $F$
         and
-    \item $C_1(\Xsf, F)$ is the set of continuously differentiable functions
-        from $\Xsf$ to $F$.
+    \item $C_1(R, F)$ is the set of continuously differentiable functions
+        from $R$ to $F$.
 \end{itemize}
 %
 The notion of derivative used in the last definition is discussed below.
+
+
 
 
 \section{Linear Differential Equations and Exponential Paths}
@@ -397,11 +401,11 @@ It is immediate from (ii) that if $m$ is any positive integer, then $\exp(mA) =
 The next lemma considers exponential flows in $\lL(E)$.
 
 \begin{lemma}\label{l:expcom2}
-    Given $A \in \lL(E)$, the function $f(t) \coloneq \exp(tA)$ is
+    Given $A \in \lL(E)$, the function $\phi(t) \coloneq \exp(tA)$ is
         continuously differentiable in $t$, with
             %
             \begin{equation}\label{eq:matdiffl}
-                \dot f(t) = A f(t) = f(t) A
+                \dot \phi(t) = A \phi(t) = \phi(t) A
                 \quad \text{and}
             \end{equation}
 \end{lemma}
@@ -411,14 +415,14 @@ The next lemma considers exponential flows in $\lL(E)$.
     Fix $A \in \lL(E)$. Applying (ii) of Lemma~\ref{l:expcom} yields
     %
     \begin{equation*}
-        \frac{f(t + h) - f(t)}{h}
+        \frac{\phi(t + h) - \phi(t)}{h}
         = \frac{\exp(tA + hA) - \exp(tA)}{h}
         = \exp(tA) \frac{\exp(hA) - I}{h}
     \end{equation*}
     %
     Using the definition \eqref{eq:expfun} and taking the limit as $h \downarrow
-    0$ gives $\dot f(t) = f(t) A $.  A small variation on the argument 
-    shows that $\dot f(t) = A f(t)$ also holds.
+    0$ gives $\dot \phi(t) = \phi(t) A $.  A small variation on the argument 
+    shows that $\dot \phi(t) = A \phi(t)$ also holds.
 \end{proof}
 
 
@@ -697,7 +701,7 @@ with the norm $\|f\| = \sup_x |f(x)| + \sup_x |f'(x)|$.
 Here we discuss right-shift semigroups.  We will embed them in a space of
 integrable functions.  Below $\lambda$ denotes Lebesgue measure.
 
-Let $C_c(\RR)$ be the set of all continuous real-valued functions $f$ on
+Let $C_K(\RR)$ be the set of all continuous real-valued functions $f$ on
 $\RR$ that vanish off a compact set.  Let $L_1(\RR)$ be the set of 
 Borel measurable real-valued functions on $\RR$ with $\| f \| \coloneq \int
 |f| \diff \lambda < \infty$.  Let $S_t$ be the linear operator on $L_1(\RR)$
@@ -716,12 +720,12 @@ defined by
 \begin{proof}
     It is simple to confirm that $(S_t)$ is an AO semigroup on $L_1(\RR)$.
     Regarding continuity, note that $\|S_t f\| = \int |f(x-t)| \diff x = \| f\|$, so
-    $\|S_t\|$ is bounded in $t$.  Since $C_c(\RR)$ is dense in $L_1(\RR)$ under this
+    $\|S_t\|$ is bounded in $t$.  Since $C_K(\RR)$ is dense in $L_1(\RR)$ under this
     norm, Lemma~\ref{l:aose} implies that, to show $(S_t)$ is a $C_0$-semigroup
     on $L_1(\RR)$, it suffices to show that $\| S_t f - f \| \to 0$ for any $f \in
-    C_c(\RR)$.
+    C_K(\RR)$.
 
-    To this end, fix $f \in C_c(\RR)$ and let $K$ be a compact set such that $f$
+    To this end, fix $f \in C_K(\RR)$ and let $K$ be a compact set such that $f$
     vanishes off $K$.  Fix $\epsilon > 0$.  By uniform continuity, we can take a
     $\delta > 0$ such that $|x-y| < \delta$ implies $|f(x) - f(y)| < \epsilon /
     \lambda(K)$.  If $t < \delta$, then
@@ -826,8 +830,10 @@ Let $E$ be a Banach space and let $(S_t)$ be an AO semigroup on $E$.  Set
        \dD(A).
 \end{equation*}
 
-The map $A$ is called the \navy{infinitesimal generator} of $(S_t)$ and $\dD(A)$
-is its domain.  
+The map $A$ is called the \navy{infinitesimal generator} (or just
+\navy{generator}) of $(S_t)$ and $\dD(A)$
+is its domain.  We sometimes also refer to the pair $(A, \dD(A))$ as the
+generator.
 
 \begin{lemma}\label{l:dals}
     The set $\dD(A)$ is a linear subspace of $E$ and $A$ is linear on $\dD(A)$.
@@ -862,9 +868,9 @@ as the ``vector field.''
 
 
 \begin{proof}
-    We begin by proving \eqref{eq:pathfrome}. Fix $u \in E$ and $t \geq 0$.
-    For $h > 0$, using properties of the integral described in
-    Lemma~\ref{l:riemann}, we have
+    Fix $u \in E$ and $t \geq 0$.
+    For $h > 0$, the properties of the integral described in
+    Lemma~\ref{l:riemann} imply that
     %
     \begin{align*}
             S_h \int_0^t S_s \, u \diff s - \int_0^t S_s \, u \diff s
@@ -878,8 +884,8 @@ as the ``vector field.''
     \end{align*}
     %
     Multiplying by $(1/h)$ and taking the limit as $h
-    \downarrow 0$ gives $A \int_0^t S_s \, u \diff s = S_t u - u$. Thus
-    \eqref{eq:pathfrome} is verified.
+    \downarrow 0$ gives $A \int_0^t S_s \, u \diff s = S_t u - u$. Hence both
+    claims in \eqref{eq:pathfrome} hold.
 \end{proof}
 
 
@@ -973,15 +979,16 @@ The next result shows that semigroups are uniquely identified by their
 generators.
 
 \begin{proposition}\label{p:sgufg}
-    Let $(S_t)$ and $(T_t)$ be two $C_0$-semigroups on $E$ with infinitesimal
+    Let $(S_t)$ and $(T_t)$ be two $C_0$-semigroups on $E$ with 
     generators $(A, \dD(A))$ and $(B, \dD(B))$.  If $(A, \dD(A)) = (B, \dD(B))$,
     then $(S_t) = (T_t)$.
 \end{proposition}
 
 \begin{proof}
-    Let the statement hold, so that $(S_t)$ and $(T_t)$ are $C_0$-semigroups
-    $(A, \dD(A))$. Fix $t > 0$.  We claim that $S_t = T_t$ on $E$. Since
-    $\dD(A)$ is dense in $E$, it suffices to show that $S_t$ and $T_t$ agree on
+    Let the statement hold, so that $(S_t)$ and $(T_t)$ are two $C_0$-semigroups
+    with generator $A$ on domain $\dD(A)$. Fix $t > 0$.  We claim
+    that $S_t = T_t$ on $E$. Since $\dD(A)$ is dense in $E$, it suffices to show
+    that $S_t$ and $T_t$ agree on
     $\dD(A)$.
 
     To this end, fix $u \in \dD(A)$ and let $s \mapsto v(s)$ be a differentiable
@@ -1059,7 +1066,7 @@ In the next theorem, $C_1(\RR_+, E)$ is the set of continuously differentiable
 functions from $\RR_+$ to $E$.
 
 \begin{theorem}\label{t:ivps}
-    Let $(S_t)$ be a $C_0$-semigroup with infinitesimal generator $(A, \dD(A)$
+    Let $(S_t)$ be a $C_0$-semigroup with generator $(A, \dD(A))$
     and let $u_0$ be a point in $\dD(A)$.  The unique solution in $C(\RR_+, E)$
     of the initial value problem $\dot u = A u$ with $u(0) = u_0$ is the
     function defined by $u(t) \coloneq S_t u_0$. Moreover, $u(t)$ is continuously
@@ -1083,9 +1090,11 @@ functions from $\RR_+$ to $E$.
 
 
 \subsection{Resolvents} 
-Let $A$ be the infinitesmial generator of a $C_0$-semigroup $(S_t)$. Since $A$ is closed linear operator, we define the \navy{Resolvent} of $(S_t)$ by
-$$R_{\lambda}(A)=(\lambda I-A)^{-1}$$
-where $R_{\lambda}(A): E\rightarrow\dD(A)$ and $\lambda\in\rho(A)$. Thus, $R_{\lambda}(A) \in\mathcal{L}(E)$.
+
+Let $(A, \dD(A))$ be the generator of a $C_0$-semigroup $(S_t)$ on $E$. Since
+$A$ is closed linear operator, we define the \navy{Resolvent} of $(S_t)$ by
+$$R_{\lambda}(A)=(\lambda I-A)^{-1}$$ where $R_{\lambda}(A): E\rightarrow\dD(A)$
+and $\lambda\in\rho(A)$. Thus, $R_{\lambda}(A) \in\mathcal{L}(E)$.
 
 \begin{proposition} 
 	Let $A$ be the infinitesmial generator of a $C_0$-semigroup $(S_t)$ satisfying $\| S_t\|\leq M e^{at}$ for all $t\geq 0$. The following hold:
