@@ -128,6 +128,7 @@
 \newcommand{\og}{{\mathbbm G}}
 \newcommand{\ctimes}{\! \times \!}
 \newcommand{\sint}{{\textstyle\int}}
+\newcommand{\me}{{\mathrm e}}
 
 \newcommand{\given}{\, | \,}
 \newcommand{\A}{\forall}
@@ -196,6 +197,7 @@
 \newcommand{\var}{\mathbbm V}
 
 \newcommand{\Xsf}{\mathsf X}
+\newcommand{\Ysf}{\mathsf Y}
 \newcommand{\Msf}{\mathsf M}
 \newcommand{\Asf}{\mathsf A}
 \newcommand{\Gsf}{\mathsf G}
@@ -259,9 +261,20 @@ In what follows,
     \item $E'$ represents the dual space (i.e., the set of bounded linear
         functionals on $E$),
     \item $\| \cdot \|$ denotes either the norm on $E$ or the operator norm on
-        $\lL(E)$, depending on context, and
-    \item $\cC$ is the set of continuous functions from $\RR_+$ to $E$.
+        $\lL(E)$, depending on context. 
 \end{itemize}
+
+Also, given $\Xsf \subset \RR$ and normed linear space $F$,
+%
+\begin{itemize}
+    \item $C_0(\Xsf, F)$ is the set of continuous functions from $\Xsf$ to $F$
+        and
+    \item $C_1(\Xsf, F)$ is the set of continuously differentiable functions
+        from $\Xsf$ to $F$.
+\end{itemize}
+%
+The notion of derivative used in the last definition is discussed below.
+
 
 \section{Linear Differential Equations and Exponential Paths}
 
@@ -277,8 +290,8 @@ To set the stage, recall that an (autonomous) linear ODE in $\RR^n$ has the form
 %
 where $x(t)$ is an $n$-vector for each $t$ and $A$ is $n \times n$.  The matrix
 $A$ is sometimes called the ``vector field.''  A first step to extend these
-concepts to an abstract Banach space is to set $\dot x(t) = A x(t)$, where
-$x(t)$ is understood as a point in the space and $A$ is a \emph{bounded} linear
+concepts to an abstract Banach space $E$ is to view $t \mapsto x(t)$ as a
+differential function from $\RR_+$ to $E$ and $A$ is a \emph{bounded} linear
 operator from the space to itself.  (This includes the finite-dimensional case,
 including the one-dimensional case as taught in elementary lectures on ODEs,
 since all linear operators on finite-dimensional spaces are bounded.  The
@@ -294,8 +307,8 @@ general ODEs (driven by possibly unbounded linear operators) in Banach space.
 
 \subsection{Preliminaries}\label{ss:prel}
 
-First we recall some facts concerning calculus for Banach space valued
-functions. To this end, let $u$ be an element of $\cC$. If, for some $t > 0$,
+We recall some facts concerning calculus for Banach space valued
+functions. To this end, let $u$ be an element of $C_0(\RR_+, E)$. If, for some $t > 0$,
 the limit
 %
 \begin{equation*}
@@ -305,21 +318,23 @@ the limit
 \end{equation*}
 %
 exists, then we say that $u$ is \navy{differentiable} at $t$ and call $\dot u(t)$
-the \navy{derivative} of $u$ at $t$.  In the case where $t=0$ we use the same
-definitions after replacing $h \to 0$ with $h \downarrow 0$.
+the \navy{derivative} of $u$ at $t$.  In the case where $t=0$ we 
+replace $h \to 0$ with $h \downarrow 0$.
 We say that $u$ is \navy{differentiable} on $\RR_+$ if $u$ is differentiable at
 $t$ for all $t \in \RR_+$.
+We say that $u$ is \navy{continuously differentiable} on $\RR_+$ and write $u
+\in C_1(\RR_+, E)$ if, in
+addition, $\dot u \in C_0(\RR_+, E)$. 
 
-Next we define an integral for continuous Banach space valued functions. Fix $u
-\in \cC$.  the (Riemann) \navy{integral} of $u$ over $[a,b]$ is the unique point
+Given $u \in C_0(\RR_+, E)$, the (Riemann) \navy{integral} of $u$ over $[a,b]$ is the unique point
 $I \in E$ such that
 %
 \begin{equation}\label{eq:rieint}
     \int_a^b \inner{u(s), u'} \diff s = \inner{I, u'} 
-    \quad \text{ for all } u' \in E'
+    \quad \text{ for all } u' \in E',
 \end{equation}
 %
-In \eqref{eq:rieint}, the left hand side is an ordinary Riemann integral for
+where the left hand side is an ordinary Riemann integral for
 real-valued functions.  
 We write $I = \int_a^b u(s) \diff s$, so that $
 \int_a^b \inner{u(s), u'} \diff s = \inner{\int_a^b u(s) \diff s, u'}$ for all
@@ -327,13 +342,13 @@ $u' \in E$.  A proof of existence and uniqueness, as well as the properties
 listed below, can be found in Section~5.1.2 of \cite{buhler2018functional}.
 
 \begin{lemma}\label{l:riemann}
-    If $u$ is continuous on $\RR_+$ and $a, b \in \RR_+$ with $a < b$, then
+    If $u \in C_0(\RR_+, E)$ and $a, b, c \in \RR_+$ with $a \leq b \leq c$, then
     %
     \begin{enumerate}
         \item $\int_a^c u(s) \diff s 
-            = \int_a^b u(s) \diff s + \int_b^c u(s) \diff s$ whenever $a < b < c$,
-        \item $\int_a^b u(s + c) \diff s = \int_{a+c}^{b+c} u(s)
-            \diff s$ whenever $c \geq 0$,
+            = \int_a^b u(s) \diff s + \int_b^c u(s) \diff s$,
+        \item $\int_a^b u(s + r) \diff s = \int_{a+r}^{b+r} u(s)
+            \diff s$ whenever $r \geq 0$,
         \item $\| \int_a^b u(s) \diff s \| \leq \int_a^b \|
             u(s)  \| \diff s$,
         \item $u(t) = \lim_{h \to 0} \, (1/h) \int_t^{t+h} u(s) \diff s$ for all
@@ -341,7 +356,7 @@ listed below, can be found in Section~5.1.2 of \cite{buhler2018functional}.
         \item $L \in \lL(E)$ implies $L \int_a^b u(s) \diff s = \int_a^b Lu(s) \diff s $.
     \end{enumerate}
     %
-    If, in addition, $u$ is continuously differentiable on $[a, b]$ with
+    If, in addition, $u$ is continuously differentiable on $\RR_+$ with
     derivative $\dot u$, then
     %
     \begin{equation}\label{eq:ftcb}
@@ -355,19 +370,17 @@ listed below, can be found in Section~5.1.2 of \cite{buhler2018functional}.
 \subsection{Exponentials of Linear Operators}
 
 The scalar exponential of $a \in \RR$ can be defined by $\exp(a)
-\coloneq \sum_{n=0}^\infty \frac{a^n}{n!}$.  Analogously, the \navy{exponential}
+\coloneq \me^a \coloneq \sum_{n=0}^\infty a^n/(n!)$.  Analogously, the \navy{exponential}
 of $A \in \lL(E)$ is given by
 %
 \begin{equation}\label{eq:expfun} 
     \exp(A) 
-    \coloneq \sum_{n=0}^\infty \frac{A^n}{n!}
-    = I + A + \frac{A^2}{2!} + \cdots
+    \coloneq \me^A \coloneq \sum_{n=0}^\infty \frac{A^n}{n!}.
 \end{equation}
 %
-We list some properties of the exponential below.
 
 \begin{lemma}\label{l:expcom}
-    Let $A$ and $B$ be elements of $\lL(E)$.  The following properties hold:
+    If $A, B \in \lL(E)$, then
     %
     \begin{enumerate}
         \item $\exp(A)$ is a well-defined element of $\lL(E)$  and $\| \exp(A) \| \leq \exp(\|A\|)$.
@@ -384,53 +397,59 @@ It is immediate from (ii) that if $m$ is any positive integer, then $\exp(mA) =
 The next lemma considers exponential flows in $\lL(E)$.
 
 \begin{lemma}\label{l:expcom2}
-    Fix $A \in \lL(E)$ and consider the function $e(t) \coloneq \exp(tA)$ from
-    $\RR$ to $\lL(E)$.  The following statements are true:
-    %
-    \begin{enumerate}
-        \item The map $e$ is differentiable in $t$, with
+    Given $A \in \lL(E)$, the function $f(t) \coloneq \exp(tA)$ is
+        continuously differentiable in $t$, with
             %
             \begin{equation}\label{eq:matdiffl}
-                \dot e(t) = A e(t) = e(t) A.
+                \dot f(t) = A f(t) = f(t) A
+                \quad \text{and}
             \end{equation}
-            %
-        \item The fundamental theorem of calculus holds, in the sense that
-            %
-            \begin{equation}\label{eq:ftcexp}
-                e(b) 
-                 = e(a) + \int_a^b \dot e(s) \diff s \quad \text{for all } a \leq b.
-            \end{equation}
-            %
-    \end{enumerate}
-    %
 \end{lemma}
 
 
+\begin{proof}
+    Fix $A \in \lL(E)$. Applying (ii) of Lemma~\ref{l:expcom} yields
+    %
+    \begin{equation*}
+        \frac{f(t + h) - f(t)}{h}
+        = \frac{\exp(tA + hA) - \exp(tA)}{h}
+        = \exp(tA) \frac{\exp(hA) - I}{h}
+    \end{equation*}
+    %
+    Using the definition \eqref{eq:expfun} and taking the limit as $h \downarrow
+    0$ gives $\dot f(t) = f(t) A $.  A small variation on the argument 
+    shows that $\dot f(t) = A f(t)$ also holds.
+\end{proof}
 
-For example, to prove (i) of Lemma~\ref{l:expcom2}, we fix $A \in \lL(E)$ and consider $e(t) = \exp(t
-A)$. Applying (ii) of Lemma~\ref{l:expcom} yields
+
+
+Lemma~\ref{l:riemann} and Lemma~\ref{l:expcom2} together yield
 %
-\begin{equation*}
-    \frac{e(t + h) - e(t)}{h}
-    = \frac{\exp(tA + hA) - \exp(tA)}{h}
-    = \exp(tA) \frac{\exp(hA) - I}{h}
-\end{equation*}
+\begin{equation}\label{eq:ftcexp}
+    \exp(t A) 
+     =  \exp(s A) + A \int_s^t \exp(r A) \diff r \quad \text{for all } s \leq t.
+\end{equation}
 %
-Using the definition \eqref{eq:expfun} and taking the limit as $h \downarrow
-0$ gives $\dot e(t) = e(t) A $.  A small variation on the argument 
-shows that $\dot e(t) = A e(t)$ also holds.
+
+
 
 
 \subsection{Initial Value Problems}\label{ss:boundedivp}
 
-Now fix $A \in \lL(E)$ and consider the \navy{initial value problem} (IVP) $\dot
-u(t) = A u(t)$ for all $t \geq 0$ with given initial condition $u(0) = u_0 \in
-E$.  A solution to this problem is $u \in \cC$ that is differentiable and 
-obeys the IVP conditions.
+Fix $A \in \lL(E)$ and consider the \navy{initial value problem} (IVP) 
+%
+\begin{equation}\label{eq:ivp}
+    \dot u(t) = A u(t)
+    \quad \text{for all } t \geq 0 
+    \text{ with } u(0) = u_0 \in E \text{ given}.     
+\end{equation}
+%
+A solution to this problem is a differentiable $u \in C_0(\RR_+, E)$ that obeys
+\eqref{eq:ivp}.
 
 \begin{proposition}\label{p:expsol}
-    Given $A \in \lL(E)$, the function $u$ defined by $u(t) = \exp(tA) u_0$ is
-    the unique solution to the IVP stated above.
+    If $A \in \lL(E)$, then $u$ defined by $u(t) = \exp(tA) u_0$ is
+    the unique solution to the IVP \eqref{eq:ivp}.
 \end{proposition}
 
 That $u$ solves the IVP is immediate from the properties in
@@ -458,7 +477,7 @@ Add roadmap.
 
 Let $(S_t) \coloneq (S_t)_{t \geq 0}$ be a family of
 linear operators in $\lL(E)$ with index $t \in \RR_+$. $(S_t)$ is called 
-an \navy{algebraic operator (AO) semigroup} if 
+an \navy{algebraic operator semigroup (AO semigroup)} if 
 $S_0$ is the idendity and $(S_t)$ has the semigroup property
 %
 \begin{equation*}
@@ -467,8 +486,7 @@ $S_0$ is the idendity and $(S_t)$ has the semigroup property
 \end{equation*}
 %
 If, in addition, $t \mapsto S_t u$ is continuous for all $u \in E$, then $(S_t)$
-is called a \navy{$C_0$-semigroup}.  When $E$ is understood, we say that $(S_t)$
-is a $C_0$-semigroup. Given $u \in E$, the function $t \mapsto S_t u$ is
+is called a \navy{$C_0$-semigroup}.  Given $u \in E$, the function $t \mapsto S_t u$ is
 called the \navy{orbit} or \navy{trajectory} of $u$ under $(S_t)$.
 The point $u$ is called the \navy{initial condition}.
 
@@ -614,27 +632,29 @@ $\lL(E)$.  The following result is from \cite{engel2006short}.
 
 \subsection{Examples}
 
+We list some examples of semigroups acting on Banach spaces.
+
 
 \subsubsection{Left-Shift Semigroups}
 
-Let $C_0(\RR_+)$ be the set of all continuous real-valued functions $f$ on
-$\RR_+$ with $f(x) \to 0$ as $x \to \infty$.  The set $C_0(\RR_+)$ is paired
+Let $C_V(\RR_+, \RR)$ be the set of all continuous real-valued functions $f$ on
+$\RR_+$ with $f(x) \to 0$ as $x \to \infty$.  The set $C_V(\RR_+, \RR)$ is paired
 with the supremum norm.  Consider the \navy{left
 translation semigroup} given by $(S_t f)(x) = f(x + t)$.
 
 \begin{lemma}\label{l:ltsemi}
-    $(S_t)$ is a $C_0$-semigroup on $C_0(\RR_+)$.  
+    $(S_t)$ is a $C_0$-semigroup on $C_V(\RR_+, \RR)$.  
 \end{lemma}
 
 \begin{proof}
-    Evidently $S_0 f = f$.  The semigroup property holds because, for $s, t
-    \geq 0$, we have
+    It is clear that $S_0$ is the identity.  The semigroup property holds
+    because, for $s, t \geq 0$, we have
     %
     \begin{equation*}
-        (S_{s + t} f)(x) = f(x + s + t) = (S_t (S_s f))(x).
+        S_{s + t} f = f(\cdot + s + t) = S_t \, S_s f
     \end{equation*}
     %
-    Regarding continuity, fix $f \in C_0(\RR_+)$ and let $(t_n)$ be a real sequence
+    Regarding continuity, fix $f \in C_V(\RR_+, \RR)$ and let $(t_n)$ be a real sequence
     with $t_n \downarrow 0$.  Fix $\epsilon > 0$.  Since $f$ is uniformly
     continuous, we can select a $\delta > 0$ such that $|f(x) - f(y)| < \epsilon$
     whenever $|x-y|<\delta$.  Let $N \in \NN$ be such that $t_n < \delta$ when
@@ -650,24 +670,24 @@ translation semigroup} given by $(S_t f)(x) = f(x + t)$.
 \end{proof}
 
 
-Let $C_0^1(\RR_+)$ be the set of all continuously differentiable $f \in
-C_0(\RR+)$ with $f' \in C_0(\RR+)$.  The set $C_0^1(\RR_+)$ is paired
+Let $C_0^1(\RR_+, \RR)$ be the set of all continuously differentiable $f \in
+C_V(\RR_+, \RR)$ with $f' \in C_V(\RR+, \RR)$.  The set $C_0^1(\RR_+, \RR)$ is paired
 with the norm $\|f\| = \sup_x |f(x)| + \sup_x |f'(x)|$.  
 
 \begin{lemma}\label{l:ltsemi2}
-    $(S_t)$ is a $C_0$-semigroup on $C_0^1(\RR_+)$.  
+    $(S_t)$ is a $C_0$-semigroup on $C_0^1(\RR_+, \RR)$.  
 \end{lemma}
 
 \begin{proof}
     In view of Lemma~\ref{l:ltsemi}, we only need to check continuity.
-    Fixing $f \in C_0^1(\RR_+)$, we have
+    Fixing $f \in C_0^1(\RR_+, \RR)$, we have
     %
     \begin{equation*}
         \| S_t f - f \|
         = \sup_x | f(x + t)  - f(x) | + \sup_x | f'(x + t)  - f'(x) |
     \end{equation*}
     %
-    Since $f$ and $f'$ are both in $C_0(\RR_+)$, the proof of
+    Since $f$ and $f'$ are both in $C_V(\RR_+, \RR)$, the proof of
     Lemma~\ref{l:ltsemi} implies that both terms on the right hand side
     converge to zero as $t \downarrow 0$.  Hence continuity holds.
 \end{proof}
