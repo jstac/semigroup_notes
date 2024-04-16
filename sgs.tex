@@ -253,9 +253,11 @@
 
 \maketitle
 
+\section{Preliminaries}
 
+Let's begin by recalling some basic definitions and fixing terminology.
 
-In what follows, 
+In all of what follows, 
 %
 \begin{itemize}
     \item $E$ denotes a real Banach space,
@@ -266,16 +268,33 @@ In what follows,
         $\lL(E)$, depending on context. 
 \end{itemize}
 
-Also, given $R \subset \RR$ and normed linear space $F$,
+Given $R \subset \RR$,
 %
 \begin{itemize}
-    \item $C_0(R, F)$ is the set of continuous functions from $R$ to $F$
+    \item $C_0(R, E)$ is the set of continuous functions from $R$ to $E$
         and
-    \item $C_1(R, F)$ is the set of continuously differentiable functions
-        from $R$ to $F$.
+    \item $C_1(R, E)$ is the set of continuously differentiable functions
+        from $R$ to $E$.
 \end{itemize}
 %
 The notion of derivative used in the last definition is discussed below.
+
+A (not necessarily bounded) linear operator $A$ from $\dD(A) \subset
+E$ into $E$ is called \navy{closed} if, for each sequence
+$(u_n) \subset \dD(A)$ such that $u_n \to u$ for some $u \in E$ and $Au_n \to y$
+for some $y \in E$, we have $u \in \dD(A)$ and, in addition, $y = Au$.
+
+Let $A \colon \dD(A) \to E$ be a closed linear operator and let $I$ be the
+identity map on $E$.  The set $\rho(A)$ of all $\lambda \in \CC$ such that
+$\lambda - A \coloneq \lambda I - A$ is a bijection from $\dD(A)$ to $E$ is called the
+\navy{resolvent set} of $A$.  Its complement $\CC \setminus \rho(A)$ is called
+the \navy{spectrum}.  Given $\lambda \in \rho(A)$, the \navy{resolvent operator}
+of $A$ is defined by
+%
+\begin{equation*}
+    R_\lambda (A) u = (\lambda - A)^{-1} u
+    \qquad (u \in E).
+\end{equation*}
 
 
 
@@ -309,11 +328,11 @@ general ODEs (driven by possibly unbounded linear operators) in Banach space.
 
 
 
-\subsection{Preliminaries}\label{ss:prel}
+\subsection{Calculus}\label{ss:calc}
 
-We recall some facts concerning calculus for Banach space valued
-functions. To this end, let $u$ be an element of $C_0(\RR_+, E)$. If, for some $t > 0$,
-the limit
+We recall some facts concerning calculus for functions mapping a subset of the
+real line into a Banach space. To this end, let $u$ be an element of $C_0(\RR_+,
+E)$. If, for some $t > 0$, the limit
 %
 \begin{equation*}
     \dot u(t)
@@ -338,12 +357,11 @@ $I \in E$ such that
     \quad \text{ for all } u' \in E',
 \end{equation}
 %
-where the left hand side is an ordinary Riemann integral for
-real-valued functions.  
-We write $I = \int_a^b u(s) \diff s$, so that $
-\int_a^b \inner{u(s), u'} \diff s = \inner{\int_a^b u(s) \diff s, u'}$ for all
-$u' \in E$.  A proof of existence and uniqueness, as well as the properties
-listed below, can be found in Section~5.1.2 of \cite{buhler2018functional}.
+where the left hand side is an ordinary Riemann integral for real-valued
+functions.  We write $I = \int_a^b u(s) \diff s$, so that $\int_a^b \inner{u(s),
+u'} \diff s = \inner{\int_a^b u(s) \diff s, u'}$ for all $u' \in E$.  A proof of
+existence and uniqueness, as well as the properties listed below, can be found
+in Section~5.1.2 of \cite{buhler2018functional}.
 
 \begin{lemma}\label{l:riemann}
     If $u \in C_0(\RR_+, E)$ and $a, b, c \in \RR_+$ with $a \leq b \leq c$, then
@@ -402,12 +420,13 @@ The next lemma considers exponential flows in $\lL(E)$.
 
 \begin{lemma}\label{l:expcom2}
     Given $A \in \lL(E)$, the function $\phi(t) \coloneq \exp(tA)$ is
-        continuously differentiable in $t$, with
-            %
-            \begin{equation}\label{eq:matdiffl}
-                \dot \phi(t) = A \phi(t) = \phi(t) A
-                \quad \text{and}
-            \end{equation}
+    continuously differentiable in $t$, with
+    %
+    \begin{equation}\label{eq:matdiffl}
+        \dot \phi(t) = A \phi(t) = \phi(t) A
+        \qquad (t \in \RR).
+    \end{equation}
+    %
 \end{lemma}
 
 
@@ -560,11 +579,16 @@ $\lL(E)$.  The following result is from \cite{engel2006short}.
 
 \begin{lemma}\label{l:ubfc}
     If $(S_t)_{t \geq 0}$ is a $C_0$-semigroup on $E$, then
-        $\sup_{t \leq \delta} \| S_t \| < \infty$ for all $\delta > 0$.
+    %
+    \begin{enumerate}
+        \item $\sup_{t \leq \delta} \| S_t \| < \infty$ for all $\delta > 0$.
+        \item there exists an $a \in \RR$ and $M \geq 1$ such that $\|S_t \|
+            \leq M \exp(t a)$ for all $t \geq 0$.
+    \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-    We first claim there exists an $\epsilon > 0$ such that $
+    Regarding (i), we first claim there exists an $\epsilon > 0$ such that $
     \sup_{t \leq \epsilon} \| S_t \| < \infty$.  Indeed, if no such $\epsilon$
     exists, then there exists a sequence $t_n \to 0$ such that 
     $\|S_{t_n}\|$ is unbounded.  But then, by the principle of uniform
@@ -577,6 +601,9 @@ $\lL(E)$.  The following result is from \cite{engel2006short}.
     the semigroup property yields $\| S_t \| \leq k M$.  Hence $t \mapsto S_t$
     is bounded on $[0, k \epsilon]$.  Since $k$ was an arbitrary element of
     $\NN$, this proves the claim in Lemma~\ref{l:ubfc}.
+
+    The proof of (ii) follows from (i).  For details see, for example,
+    Theorem~1.2.8 of \cite{applebaum2019semigroups}.
 \end{proof}
 
 \begin{lemma}\label{l:semiequivcon}
@@ -836,7 +863,8 @@ is its domain.  We sometimes also refer to the pair $(A, \dD(A))$ as the
 generator.
 
 \begin{lemma}\label{l:dals}
-    The set $\dD(A)$ is a linear subspace of $E$ and $A$ is linear on $\dD(A)$.
+    The set $\dD(A)$ is a linear subspace of $E$ and $A$ is a closed linear
+    operator from $\dD(A)$ to $E$.
 \end{lemma}
 
 \begin{proof}
@@ -849,6 +877,9 @@ generator.
     \end{equation*}
     %
     we see that $w \in \dD(A)$ and, moreover, $Aw = \alpha Au + \beta Av$.
+    This proves that $A$ is a linear operator from linear subspace $\dD(A)$ to
+    $E$.  The proof that $A$ is closed can be found in Theorem~1.3.16 of
+    \cite{applebaum2019semigroups}.
 \end{proof}
 
 The next result shows that any trajectory of $(S_t)$ starting from a point $\bar
@@ -1091,57 +1122,120 @@ functions from $\RR_+$ to $E$.
 
 \subsection{Resolvents} 
 
-Let $(A, \dD(A))$ be the generator of a $C_0$-semigroup $(S_t)$ on $E$. Since
-$A$ is closed linear operator, we define the \navy{Resolvent} of $(S_t)$ by
-$$R_{\lambda}(A)=(\lambda I-A)^{-1}$$ where $R_{\lambda}(A): E\rightarrow\dD(A)$
-and $\lambda\in\rho(A)$. Thus, $R_{\lambda}(A) \in\mathcal{L}(E)$.
+Let $(A, \dD(A))$ be the generator of a $C_0$-semigroup $(S_t)$ on $E$.
+Recalling that $A$ is a closed linear operator (Lemma~\ref{l:dals}), the
+\navy{resolvent} of $A$ is, for each $\lambda\in\rho(A)$, the bounded and
+bijective linear operator
+%
+\begin{equation*}
+   R_{\lambda}(A)=(\lambda - A)^{-1} 
+\end{equation*}
+%
+from $E$ to $\dD(A)$.  We also refer to $R_\lambda(A)$ as the resolvent of the
+semigroup $(S_t)$.  We write $R_\lambda$ instead of $R_\lambda(A)$ when $A$ is
+understood.
 
 \begin{proposition} 
-	Let $A$ be the infinitesmial generator of a $C_0$-semigroup $(S_t)$ satisfying $\| S_t\|\leq M e^{at}$ for all $t\geq 0$. The following hold:
+    Let $A$ be the generator of a $C_0$-semigroup $(S_t)$
+    satisfying $\| S_t\|\leq M e^{at}$ for all $t\geq 0$.  
+    If $\lambda\in \CC$ with $\Re(\lambda)>a$, then 
+    $\lambda$ is in the resolvent set $\rho(A)$.  Moreover,
+    %
 	\begin{enumerate}
-		\item $\{\lambda\in \mathbb{C}:\Re(\lambda)>a\}\subset \rho(A)$
-		\item for all $\Re(\lambda)>a$
-		$$R_{\lambda}(A)=\int_{0}^{\infty} e^{-\lambda t}S_t \diff t$$
-		
-		\item for all $\Re(\lambda)>a$
-		$$\|R_{\lambda}(A)\|\leq\frac{M}{\Re(\lambda)-a}$$
+		\item the operator norm of the resolvent obeys 
+            %
+            \begin{equation*}
+                \|R_{\lambda}\|\leq\frac{M}{\Re(\lambda)-a}
+                \quad \text{and}
+            \end{equation*}
+            %
+		\item the resolvent has the integral representation
+            %
+            \begin{equation*}
+                R_{\lambda}
+                = \int_{0}^{\infty} e^{-\lambda t}S_t \diff t.
+            \end{equation*}
+	        %	
 	\end{enumerate}
+    %
 \end{proposition}
+
 \begin{proof}
-	 Let $T_{\lambda}=\int_{0}^{\infty} e^{-\lambda t}S_t \diff t$ and we need to show $T_{\lambda}=(\lambda I-A)^{-1}$ for  all $\Re(\lambda)>a$. That is, for all $u\in E$
-	 \begin{equation*}
-	 	T_{\lambda}(\lambda I-A)u=u
-	 	\quad \text{and} \quad
-	 	(\lambda I-A)T_{\lambda}u=u
-	 \end{equation*}
- which is equivalent to 
+    Let $(S_t)$ be as stated, with $\|S_t\| \leq M \exp(ta)$ for all $t \geq 0$.
+    Fix $\lambda \in \CC$ with $\Re(\lambda) > a$. Let
+    $T_{\lambda}=\int_{0}^{\infty} e^{-\lambda t}S_t \diff t$.
+    Fixing $u\in E$, we have
+    %
+    %
+    \begin{equation*}
+        \|T_{\lambda}u\|
+        = \left\|
+                \int_0^\infty \me^{-\lambda t} S_tu \diff t 
+            \right\|
+            \leq \int_{0}^{\infty} |e^{-\lambda t} | \cdot \|S_tu\| \diff t
+    \end{equation*}
+    %
+    Since $|\me^{-\lambda t}| = |\me^{- \Re(\lambda) t}|$, we obtain
+    %
+    \begin{equation*}
+        \|T_{\lambda}u\|
+        \leq  \|u\| M \int_0^\infty \me^{(a-\Re(\lambda)) t} \diff   t
+        = \frac{M}{\Re(\lambda)-a} \|u\| .
+    \end{equation*}
+    %
+    This proves that $T_{\lambda}$ is well-defined and bounded on $E$, and that
+    (i) holds.  Next we claim that
+	$T_{\lambda}(\lambda - A)  = (\lambda - A)T_{\lambda} = I$,
+    which is equivalent to 
+    %
     \begin{equation}\label{eq:rvt}
-   	T_{\lambda}Au=AT_{\lambda}u=\lambda T_{\lambda}u-u
-     \end{equation}
- We first show $T_{\lambda}$ is bounded.
-     \begin{align*}
- 	\|T_{\lambda}u\|
- 	&=\|\int_{0}^{\infty} e^{-\lambda t}S_tu \diff t\|\leq \int_{0}^{\infty} \|e^{-\lambda t} \|\cdot\|S_tu\| \diff t\\
- 	&\leq  	\|u\|M\int_{0}^{\infty} \e^{(a-\Re(\lambda)) t} \diff   t=\frac{M}{\Re(\lambda)-a} \|u\| 
-    \end{align*}
-Since $T_{\lambda}$ and $(S_t)$ are bounded,
+        T_{\lambda}Au = AT_{\lambda}u = \lambda T_{\lambda}u-u
+        \quad \text{for all } u \in E.
+    \end{equation}
+    %
+    Since $T_{\lambda}$ and $(S_t)$ are bounded,
+    %
     \begin{align*}
     	T_{\lambda} Au
-    	&=\int_{0}^{\infty} e^{-\lambda t}S_t \lim_{h \downarrow 0}\frac{S_h-I}{h}u\diff t\\
-    	&=\lim_{h \downarrow 0}\int_{0}^{\infty} e^{-\lambda t}S_t \frac{S_h-I}{h}u\diff t\\
-    	&=\lim_{h \downarrow 0}\frac{S_h-I}{h}\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t=AT_{\lambda}u
+    	& = \int_{0}^{\infty} \me^{-\lambda t}S_t \lim_{h \downarrow 0}
+            \frac{S_h-I}{h}u\diff t
+        \\
+    	& = \lim_{h \downarrow 0}\int_{0}^{\infty} \me^{-\lambda t}S_t 
+            \frac{S_h-I}{h}u\diff t
+    	= \lim_{h \downarrow 0}\frac{S_h-I}{h}
+            \int_0^\infty \me^{-\lambda t}S_t u\diff t = AT_{\lambda}u
     \end{align*}
-Then we have $T_{\lambda} Au=AT_{\lambda}u$. We next show the second equality of \eqref{eq:rvt}.
-   \begin{align*}
-   AT_{\lambda}u&
-   =\lim_{h \downarrow 0}\frac{S_h-I}{h}\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t=\lim_{h \downarrow 0}(\frac{1}{h}\int_{0}^{\infty} e^{-\lambda t}S_{t+h} u\diff t)-\frac{1}{h}\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t)\\
-   &=\lim_{h \downarrow 0}(\frac{1}{h}\int_{h}^{\infty} e^{-\lambda( t-h)}S_{t} u\diff t)-\frac{1}{h}\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t)\\
-   &=\lim_{h \downarrow 0}- e^{\lambda h}\frac{1}{h}\int_{0}^{h} e^{-\lambda t}S_t u\diff t+\lim_{h \downarrow 0}\frac{1}{h}(e^{\lambda h}-1)\int_{0}^{\infty} e^{-\lambda t}S_t u\diff t=-u+\lambda T_{\lambda}u
-\end{align*}
-Thus, statement (ii) holds and statement (i) and (iii) follow from the proof of (ii).
+    %
+    This establishes the first equality in \eqref{eq:rvt}.  Regarding the
+    second, observe that
+    %
+    \begin{align*}
+       AT_{\lambda}u &
+        = \lim_{h \downarrow 0}\frac{S_h-I}{h}
+            \int_{0}^{\infty} \me^{-\lambda t}S_t u\diff t 
+            = \lim_{h \downarrow 0}
+            (\frac{1}{h}\int_{0}^{\infty} \me^{-\lambda t}S_{t+h} u\diff t)
+            - \frac{1}{h}\int_{0}^{\infty} \me^{-\lambda t}S_t u\diff t)
+        \\
+       & = \lim_{h \downarrow 0}(\frac{1}{h}\int_{h}^{\infty} \me^{-\lambda( t-h)}S_{t} u\diff t)
+         -\frac{1}{h}\int_{0}^{\infty} \me^{-\lambda t}S_t u\diff t)\\
+       & = \lim_{h \downarrow 0}- \me^{\lambda h}\frac{1}{h}\int_{0}^{h} \me^{-\lambda t}S_t u\diff t
+            +\lim_{h \downarrow 0}\frac{1}{h}(\me^{\lambda h}-1)
+            \int_0^\infty \me^{-\lambda t}S_t u\diff t 
+            = -u+\lambda T_{\lambda}u
+    \end{align*}
+    %
+    It follows that $\lambda$ is in the resolvent set $\rho(A)$ and that the
+    integral representation in (ii) holds.
 \end{proof}
-\subsection{Examples}
-\subsubsection{Diffusion Semigroups(One-Dimenstional).} Consider the Banach Space $E=C[0,1]$ and the differential operator 
+
+
+
+\subsection{Example: Diffusion Semigroups} 
+
+Consider the Banach
+Space $E = C[0,1]$ and the differential operator 
+%
 \begin{equation*}
 Af:=f''
 \end{equation*}  
